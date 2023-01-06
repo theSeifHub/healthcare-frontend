@@ -1,1 +1,1 @@
-# healthcare-grad-project
+# Graduation Project: Health Care Frontend
