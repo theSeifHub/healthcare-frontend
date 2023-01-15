@@ -67,7 +67,7 @@ const NavBar = () => {
 					))}
 				</ul>
 			</nav>
-			<div style={{ width: spacing(23), display: "flex", alignItems: "center", gap: spacing(3) }}>
+			<div style={{ width: spacing(30), display: "flex", alignItems: "center", gap: spacing(2) }}>
 				<RouterLink to={"/sign-up"} style={{ textDecoration: "none" }}>
 					<Typography
 						variant="button"
@@ -76,6 +76,7 @@ const NavBar = () => {
 							background: secondary.main,
 							padding: `${spacing(0.5)} ${spacing(1)}`
 						}}
+						fontSize={spacing(2.5)}
 					>
 						Sign Up
 					</Typography>
@@ -88,6 +89,7 @@ const NavBar = () => {
 							background: primary.main,
 							padding: `${spacing(0.5)} ${spacing(1)}`
 						}}
+						fontSize={spacing(2.5)}
 					>
 						Sign In
 					</Typography>
