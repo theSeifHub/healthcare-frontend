@@ -11,6 +11,7 @@ import {
   SignIn,
   SignUp,
   Services,
+  ContactUs,
 } from './screens';
 import NavBar from "./components/NavBar";
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path={'/booking'} element={<Booking />} />
         <Route path={'/sign-up'} element={<SignUp />} />
         <Route path={'/sign-in'} element={<SignIn />} />
+        <Route path={'/contact-us'} element={<ContactUs />} />
       </Routes>
     </>
   );
