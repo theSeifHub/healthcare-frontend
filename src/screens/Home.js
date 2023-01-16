@@ -3,6 +3,7 @@ import theme from "../theme";
 import { Link as RouterLink } from "react-router-dom";
 import { Paper, Typography } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CustomBadge from "../components/CustomBadge";
 
 const appointmentsItems = [
   {
@@ -19,6 +20,34 @@ const appointmentsItems = [
     img: 'find_doctor.png',
     alt: 'find a doctor',
     description: 'With more than 1000+ doctors and on mission to provide best care Health Care Service',
+  },
+];
+
+const specialities = [
+  {
+    img: '1-kidney.png',
+    alt: 'kidney',
+    title: 'Urology',
+  },
+  {
+    img: '2-brain.png',
+    alt: 'brain',
+    title: 'Neurology',
+  },
+  {
+    img: '3-bone.png',
+    alt: 'bone',
+    title: 'Orthopedics',
+  },
+  {
+    img: '4-heart.png',
+    alt: 'heart',
+    title: 'Cardiology',
+  },
+  {
+    img: '5-teeth.png',
+    alt: 'teeth',
+    title: 'Dentistry',
   },
 ];
 
@@ -112,7 +141,39 @@ const Home = () => {
           ))}
         </div>
       </section>
-      <section style={{ display: "flex", alignItems: "center", justifyContent: "center", borderStyle: "dashed" }}>Section 3</section>
+
+      <section style={{ padding: `${spacing(7)} ${spacing(3)}` }}>
+        <Typography variant="h3" style={{ textAlign: 'center', marginBottom: spacing(5) }}>
+          Clinics and Specialties
+        </Typography>
+        <div style={{ display: "flex", justifyContent: "center", gap: spacing(6) }}>
+          {specialities.map((spec, index) => (
+            <div key={index}>
+              <CustomBadge badgeContent={''} color="secondary">
+                <Paper elevation={3} style={{
+                  width: spacing(25),
+                  height: spacing(25),
+                  borderRadius: spacing(12),
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}>
+                  <img
+                    alt={spec.alt}
+                    src={require(`../assets/img/${spec.img}`)}
+                    width={spacing(18)}
+                    height={spacing(18)}
+                  />
+                </Paper>
+              </CustomBadge>
+              <Typography fontSize={spacing(3)} textAlign='center' style={{ margin: `${spacing(3)} 0` }}>
+                {spec.title}
+              </Typography>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section style={{ display: "flex", alignItems: "center", justifyContent: "center", borderStyle: "dashed" }}>Section 4</section>
     </>
   );
