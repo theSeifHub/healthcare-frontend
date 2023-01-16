@@ -3,6 +3,8 @@ import theme from "../theme";
 import { Link as RouterLink } from "react-router-dom";
 import { Paper, Typography } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CustomBadge from "../components/CustomBadge";
 
 const appointmentsItems = [
@@ -48,6 +50,39 @@ const specialities = [
     img: '5-teeth.png',
     alt: 'teeth',
     title: 'Dentistry',
+  },
+];
+
+const doctors = [
+  {
+    name: 'Dr. Marwan Mohamed',
+    speciality: 'Ophthalmologist',
+    clinicAddress: 'Assiut, Gomhorya Street',
+    appointments: {
+      days: ['Saturday', 'Monday', 'Wednesday'],
+      from: '11 am',
+      to: '6 pm'
+    },
+  },
+  {
+    name: 'Dr. Nourhan Mamdouh',
+    speciality: 'General Practitioner',
+    clinicAddress: 'Assiut, El-Nemes Street',
+    appointments: {
+      days: ['Sunday', 'Tuesday', 'Thursday'],
+      from: '12 pm',
+      to: '8 pm'
+    },
+  },
+  {
+    name: 'Dr. Alaa Mahmoud',
+    speciality: 'Obstetrician and Gynecologist',
+    clinicAddress: 'Assiut, El-Mohaza Street',
+    appointments: {
+      days: ['Wednesday', 'Thursday', 'Friday'],
+      from: '11 am',
+      to: '6 pm'
+    },
   },
 ];
 
@@ -174,7 +209,78 @@ const Home = () => {
         </div>
       </section>
 
-      <section style={{ display: "flex", alignItems: "center", justifyContent: "center", borderStyle: "dashed" }}>Section 4</section>
+      <section style={{ background: background.default, padding: `${spacing(7)} ${spacing(3)}` }}>
+        <Typography variant="h3" textAlign='center'>
+          Our Doctors
+        </Typography>
+        <Typography
+          variant="body1"
+          fontFamily='serif'
+          fontSize={spacing(2.5)}
+          textAlign='center'
+          style={{ margin: spacing(5) }}
+        >
+          Our team of medical experts is there for you, from finding the right doctors and hospitals to booking appointments
+          and giving any kind of medical help in between.
+        </Typography>
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: spacing(5),
+        }}>
+          {doctors.map((doc, index) => (
+            <Paper key={index} style={{
+              width: spacing(40),
+              background: background.default,
+              display: "flex",
+              flexDirection: "column",
+              border: `${spacing(2)} solid #fff`,
+              padding: spacing(3),
+            }} >
+              <img
+                alt="doctor icon"
+                src={require('../assets/img/doctor-placeholder.png')}
+                width={spacing(20)} height={spacing(24)}
+                style={{ margin: spacing(5), alignSelf: "center" }}
+              />
+              <Typography variant="h5" textAlign='center'>{doc.name}</Typography>
+              <Typography
+                variant="body1"
+                fontFamily='sans-serif'
+                fontSize={spacing(2)}
+                textAlign='center'
+              >
+                {doc.speciality}
+              </Typography>
+              <Typography
+                variant="body1"
+                fontFamily='sans-serif'
+                fontSize={spacing(2)}
+              >
+                <LocationOnIcon style={{ marginRight: spacing(2), marginTop: spacing(2) }} />
+                {doc.clinicAddress}
+              </Typography>
+              <Typography
+                variant="body1"
+                fontFamily='sans-serif'
+                fontSize={spacing(2)}
+              >
+                <AccessTimeIcon style={{ marginRight: spacing(2), marginTop: spacing(2) }} />
+                {doc.appointments.days.join(', ')}
+              </Typography>
+              <Typography
+                variant="body1"
+                fontFamily='sans-serif'
+                fontSize={spacing(2)}
+                style={{ marginLeft: spacing(5) }}
+              >
+                {`from ${doc.appointments.from} to ${doc.appointments.to}`}
+              </Typography>
+            </Paper>
+          ))}
+        </div>
+      </section>
     </>
   );
 };
