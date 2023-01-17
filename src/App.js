@@ -14,6 +14,7 @@ import {
   ContactUs,
 } from './screens';
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path={'/sign-in'} element={<SignIn />} />
         <Route path={'/contact-us'} element={<ContactUs />} />
       </Routes>
+      <Footer />
     </>
   );
 }

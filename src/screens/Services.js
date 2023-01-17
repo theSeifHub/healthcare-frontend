@@ -1,9 +1,8 @@
 import React from "react";
 
 const Services = () => {
-  console.log('SERVICES');
   return (
-    <h1 style={{ marginTop: 400 }}>
+    <h1 style={{ minHeight: '78vh' }}>
       Services
     </h1>
   );

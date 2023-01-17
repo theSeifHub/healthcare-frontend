@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <h1 style={{ marginTop: 400 }}>
+    <h1 style={{ minHeight: '78vh' }}>
       AboutUs
     </h1>
   );

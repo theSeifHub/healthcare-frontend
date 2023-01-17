@@ -9,6 +9,7 @@ const SignIn = () => {
 
   return (
     <section style={{
+      minHeight: '79vh',
       display: 'flex',
       flexDirection: "column",
       alignItems: "center",
@@ -20,7 +21,8 @@ const SignIn = () => {
         display: 'flex',
         alignItems: "center",
         justifyContent: "center",
-        gap: spacing(3)
+        gap: spacing(3),
+        marginBottom: spacing(5),
       }}>
         <img alt="sign in profile icon" src={require("../assets/img/signin-profile.png")} />
         <Typography variant="h4">
