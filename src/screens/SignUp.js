@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import {
   Paper,
   Button,
   TextField,
   FormControl,
+  FormHelperText,
   FormLabel,
   Select,
   Typography,
@@ -13,6 +15,7 @@ import {
 import SendIcon from '@mui/icons-material/Send';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import theme from "../theme";
+import stores from "../store";
 
 const clinics = [
   {
@@ -54,15 +57,55 @@ const SignUp = () => {
     palette: { background }
   } = theme;
 
+  const navigate = useNavigate();
+
+  const [signUpError, setSignUpError] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
+  const [firstNameError, setFirstNameError] = useState('');
   const [lastName, setLastName] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userNameError, setUserNameError] = useState('');
   const [clinic, setClinic] = useState('');
+  const [clinicError, setClinicError] = useState('');
   const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(null);
+  const [dateOfBirthError, setDateOfBirthError] = useState('');
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+  const handleRegister = async () => {
+    setFirstNameError(firstName ? '' : 'First name is required');
+    setLastNameError(lastName ? '' : 'Last name is required');
+    setUserNameError(userName ? '' : 'Username is required');
+    // setClinicError(clinic ? '' : 'Clinic is missing');
+    // setPhoneError(phone ? '' : 'Phone is missing');
+    // setDateOfBirthError(dateOfBirth ? '' : 'Date of birth is missing');
+    setEmailError(email ? '' : 'Email is required');
+    setPasswordError(password ? '' : 'Password is required');
+    setConfirmPasswordError((confirmPassword && confirmPassword === password)
+      ? '' : 'Passwords must match');
+    if (email && password && userName && firstName && lastName && password === confirmPassword) {
+      try {
+        const doctorData = {
+          email,
+          password,
+          user_name: userName,
+          first_name: firstName,
+          last_name: lastName,
+        };
+        await stores.authStore.registerDoctor(doctorData);
+        navigate("/sign-in");
+      } catch (err) {
+        setSignUpError(`${err.status}: ${err.data[Object.keys(err.data)[0]]}`);
+      }
+    }
+  };
 
   return (
     <section style={{ minHeight: '77vh', padding: spacing(3), display: 'flex', flexDirection: 'column' }}>
@@ -89,15 +132,8 @@ const SignUp = () => {
               onChange={(evt) => setFirstName(evt.currentTarget.value)}
               variant="outlined"
               inputProps={{ placeholder: 'Enter Your Name' }}
-            />
-          </FormControl>
-          <FormControl style={{ flex: 1 }}>
-            <FormLabel style={{ marginBottom: spacing(1) }}>Middle Name</FormLabel>
-            <TextField
-              value={middleName}
-              onChange={(evt) => setMiddleName(evt.currentTarget.value)}
-              variant="outlined"
-              inputProps={{ placeholder: 'Enter Your Name' }}
+              error={!!firstNameError}
+              helperText={firstNameError}
             />
           </FormControl>
           <FormControl style={{ flex: 1 }}>
@@ -107,6 +143,19 @@ const SignUp = () => {
               onChange={(evt) => setLastName(evt.currentTarget.value)}
               variant="outlined"
               inputProps={{ placeholder: 'Enter Your Name' }}
+              error={!!lastNameError}
+              helperText={lastNameError}
+            />
+          </FormControl>
+          <FormControl style={{ flex: 1 }}>
+            <FormLabel style={{ marginBottom: spacing(1) }}>Username</FormLabel>
+            <TextField
+              value={userName}
+              onChange={(evt) => setUserName(evt.currentTarget.value)}
+              variant="outlined"
+              inputProps={{ placeholder: 'Enter A Username' }}
+              error={!!userNameError}
+              helperText={userNameError}
             />
           </FormControl>
         </div>
@@ -125,12 +174,14 @@ const SignUp = () => {
               displayEmpty
               defaultValue='none'
               onChange={(evt) => setClinic(evt.target.value)}
+              error={!!clinicError}
             >
               <MenuItem value='none' disabled>Select Clinic</MenuItem>
               {clinics.map((cl) => (
                 <MenuItem key={cl.id} value={cl.id}>{cl.title}</MenuItem>
               ))}
             </Select>
+            <FormHelperText error>{clinicError}</FormHelperText>
           </FormControl>
           <FormControl style={{ flex: 1 }}>
             <FormLabel style={{ marginBottom: spacing(1) }}>Mobile Number</FormLabel>
@@ -139,6 +190,8 @@ const SignUp = () => {
               onChange={(evt) => setPhone(evt.currentTarget.value)}
               variant="outlined"
               inputProps={{ placeholder: 'Enter Your Mobile Number' }}
+              error={!!phoneError}
+              helperText={phoneError}
             />
           </FormControl>
           <FormControl style={{ flex: 1 }}>
@@ -155,6 +208,8 @@ const SignUp = () => {
                   {...params}
                   variant="outlined"
                   inputProps={{ ...params.inputProps, placeholder: 'DD/MM/YYYY' }}
+                  error={!!dateOfBirthError}
+                  helperText={dateOfBirthError}
                 />
               )}
             />
@@ -176,6 +231,8 @@ const SignUp = () => {
               onChange={(evt) => setEmail(evt.currentTarget.value)}
               variant="outlined"
               inputProps={{ placeholder: 'Enter Your Email' }}
+              error={!!emailError}
+              helperText={emailError}
             />
           </FormControl>
           <FormControl style={{ flex: 1 }}>
@@ -186,6 +243,8 @@ const SignUp = () => {
               onChange={(evt) => setPassword(evt.currentTarget.value)}
               variant="outlined"
               inputProps={{ placeholder: 'Enter Password' }}
+              error={!!passwordError}
+              helperText={passwordError}
             />
           </FormControl>
           <FormControl style={{ flex: 1 }}>
@@ -196,15 +255,23 @@ const SignUp = () => {
               onChange={(evt) => setConfirmPassword(evt.currentTarget.value)}
               variant="outlined"
               inputProps={{ placeholder: 'Confirm Password' }}
+              error={!!confirmPasswordError}
+              helperText={confirmPasswordError}
             />
           </FormControl>
         </div>
       </Paper>
 
+      <div style={{ height: spacing(2), marginTop: spacing(2) }}>
+        {!!signUpError && (
+          <Typography variant="subtitle1" color="error" textAlign="center">{signUpError}</Typography>
+        )}
+      </div>
+
       <Button
         variant="contained"
         size="large"
-        onClick={() => console.log('register clicked')}
+        onClick={handleRegister}
         endIcon={<SendIcon />}
         style={{
           width: spacing(15),
