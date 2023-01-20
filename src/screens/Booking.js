@@ -46,7 +46,7 @@ const Booking = () => {
           gap: spacing(3),
           padding: spacing(3),
         }}>
-          <Typography variant="h4" >Book Appointment</Typography>
+          <Typography variant="h4">Book Appointment</Typography>
           <FormControl style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
             <FormLabel style={{ flex: 1 }}>Patient Name:</FormLabel>
             <TextField
