@@ -1,7 +1,9 @@
 import React from "react";
-import { AppBar, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import { AppBar, Button, Typography } from "@mui/material";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import theme from "../theme";
+import stores from "../store";
 
 const pageRoutes = [
 	{
@@ -31,6 +33,8 @@ const NavBar = () => {
 		palette: { primary, secondary, background },
 		spacing
 	} = theme;
+
+	const navigate = useNavigate();
 
 	return (
 		<AppBar
@@ -68,35 +72,58 @@ const NavBar = () => {
 				</ul>
 			</nav>
 			<div style={{ width: spacing(30), display: "flex", alignItems: "center", gap: spacing(2) }}>
-				<RouterLink to={"/sign-up"} style={{ textDecoration: "none" }}>
-					<Typography
-						variant="button"
-						color={secondary.contrastText}
-						style={{
-							background: secondary.main,
-							padding: `${spacing(0.5)} ${spacing(1)}`
+				{stores.authStore.user ? (
+					<Button
+						variant="contained"
+						size="large"
+						onClick={() => {
+							console.log("signout clicked");
+							stores.authStore.logout();
+							navigate("/sign-in");
 						}}
-						fontSize={spacing(2.5)}
-					>
-						Sign Up
-					</Typography>
-				</RouterLink>
-				<RouterLink to={"/sign-in"} style={{ textDecoration: "none" }}>
-					<Typography
-						variant="button"
-						color={primary.contrastText}
+						color="primary"
 						style={{
+							width: spacing(15),
 							background: primary.main,
 							padding: `${spacing(0.5)} ${spacing(1)}`
 						}}
-						fontSize={spacing(2.5)}
+						fontSize={spacing()}
 					>
-						Sign In
-					</Typography>
-				</RouterLink>
+						Sign Out
+					</Button>
+				) : (
+					<>
+						<RouterLink to={"/sign-up"} style={{ textDecoration: "none" }}>
+							<Typography
+								variant="button"
+								color={secondary.contrastText}
+								style={{
+									background: secondary.main,
+									padding: `${spacing(0.5)} ${spacing(1)}`
+								}}
+								fontSize={spacing(2.5)}
+							>
+								Sign Up
+							</Typography>
+						</RouterLink>
+						<RouterLink to={"/sign-in"} style={{ textDecoration: "none" }}>
+							<Typography
+								variant="button"
+								color={primary.contrastText}
+								style={{
+									background: primary.main,
+									padding: `${spacing(0.5)} ${spacing(1)}`
+								}}
+								fontSize={spacing(2.5)}
+							>
+								Sign In
+							</Typography>
+						</RouterLink>
+					</>
+				)}
 			</div>
 		</AppBar>
 	);
 };
 
-export default NavBar;
+export default observer(NavBar);
