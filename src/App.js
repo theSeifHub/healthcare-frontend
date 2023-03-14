@@ -16,19 +16,57 @@ import {
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
+const routes = [
+  {
+    path: '/',
+    element: <Home />,
+    exact: true,
+  },
+  {
+    path: '/about-us',
+    element: <AboutUs />,
+    exact: true,
+  },
+  {
+    path: '/services',
+    element: <Services />,
+    exact: true,
+  },
+  {
+    path: '/doctors',
+    element: <Doctors />,
+    exact: true,
+  },
+  {
+    path: '/booking',
+    element: <Booking />,
+    exact: true,
+  },
+  {
+    path: '/sign-up',
+    element: <SignUp />,
+    exact: true,
+  },
+  {
+    path: '/sign-in',
+    element: <SignIn />,
+    exact: true,
+  },
+  {
+    path: '/contact-us',
+    element: <ContactUs />,
+    exact: true,
+  },
+];
+
 const App = () => {
   return (
     <>
       <NavBar />
       <Routes>
-        <Route path={'/'} element={<Home />} />
-        <Route path={'/about-us'} element={<AboutUs />} />
-        <Route path={'/services'} element={<Services />} />
-        <Route path={'/doctors'} element={<Doctors />} />
-        <Route path={'/booking'} element={<Booking />} />
-        <Route path={'/sign-up'} element={<SignUp />} />
-        <Route path={'/sign-in'} element={<SignIn />} />
-        <Route path={'/contact-us'} element={<ContactUs />} />
+        {routes.map(r => (
+          <Route path={r.path} element={r.element} exact={r.exact} />
+        ))}
       </Routes>
       <Footer />
     </>
