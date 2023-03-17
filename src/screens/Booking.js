@@ -36,7 +36,7 @@ const Booking = () => {
   const [age, setAge] = useState('');
 
   return (
-    <section style={{ minHeight: '81vh', marginTop: spacing(2), display: "flex" }}>
+    <section style={{ marginTop: spacing(2), display: "flex" }}>
       <div style={{ flex: 3, margin: spacing(3) }}>
         <Paper elevation={0} style={{
           width: '100%',

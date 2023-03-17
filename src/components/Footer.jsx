@@ -21,7 +21,8 @@ const Footer = () => {
 				justifyContent: "center",
 				gap: spacing(5),
 				background: secondary.main,
-				height: spacing(7.5)
+				padding: spacing(2),
+				marginTop: "auto"
 			}}
 		>
 			<FacebookIcon

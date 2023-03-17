@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactUs = () => {
   return (
-    <h1 style={{ minHeight: '78vh' }}>
+    <h1>
       TODO: Contact Us
     </h1>
   );

@@ -31,12 +31,11 @@ const SignIn = () => {
 
   return (
     <section style={{
-      minHeight: '79vh',
       display: 'flex',
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      marginTop: spacing(4),
+      flexGrow: 1,
       gap: spacing(3)
     }}>
       <Paper elevation={0} style={{

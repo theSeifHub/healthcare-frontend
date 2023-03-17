@@ -108,7 +108,7 @@ const SignUp = () => {
   };
 
   return (
-    <section style={{ minHeight: '77vh', padding: spacing(3), display: 'flex', flexDirection: 'column' }}>
+    <section style={{ padding: spacing(3), display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h4" style={{ marginBottom: spacing(2) }}>Registration</Typography>
       <Typography variant="h6" style={{ marginBottom: spacing(2) }}>Personal Details</Typography>
       <Paper elevation={0} style={{
