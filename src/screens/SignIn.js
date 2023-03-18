@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Paper, Typography, TextField, Button, Link } from "@mui/material";
+import { Paper, Typography, TextField, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import theme from "../theme";
 import stores from "../store";
@@ -92,10 +92,6 @@ const SignIn = () => {
       >
         Login
       </Button>
-
-      <Link href="#" variant="h5" underline="hover">
-        Forgot your password?
-      </Link>
     </section>
   );
 };
