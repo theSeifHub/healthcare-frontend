@@ -10,6 +10,8 @@ import {
   Home,
   SignIn,
   SignUp,
+  DoctorSignUp,
+  PatientSignUp,
   Services,
   ContactUs,
 } from './screens';
@@ -45,6 +47,16 @@ const routes = [
   {
     path: '/sign-up',
     element: <SignUp />,
+    exact: true,
+  },
+  {
+    path: '/sign-up/doctor',
+    element: <DoctorSignUp />,
+    exact: true,
+  },
+  {
+    path: '/sign-up/patient',
+    element: <PatientSignUp />,
     exact: true,
   },
   {
