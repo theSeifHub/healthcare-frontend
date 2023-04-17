@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { AppBar, Button, Typography } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import theme from "../theme";
-import stores from "../store";
+import stores from "../stores";
 
 const pageRoutes = [
 	{
@@ -87,7 +87,6 @@ const NavBar = () => {
 							background: primary.main,
 							padding: `${spacing(0.5)} ${spacing(1)}`
 						}}
-						fontSize={spacing()}
 					>
 						Sign Out
 					</Button>

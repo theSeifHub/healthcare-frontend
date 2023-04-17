@@ -128,7 +128,7 @@ const DoctorSignUp = () => {
           association_number: syndicateId,
         };
 
-        await stores.doctorsStore.createDoctor(doctorData);
+        await stores.doctorsStore.createNewDoctor(doctorData);
         navigate("/");
       } catch (err) {
         setSignUpError(`${err.status}: ${err.data[Object.keys(err.data)[0]]}`);
@@ -140,12 +140,24 @@ const DoctorSignUp = () => {
     <section style={{ padding: `${spacing(3)} ${spacing(5)}`, display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h4" style={{ marginBottom: spacing(2) }}>Doctor Registration</Typography>
 
+      <div style={{ height: spacing(6), marginTop: spacing(2) }}>
+        {!!signUpError && (
+          <Typography
+            variant="h5"
+            color="error"
+            textAlign="center"
+          >
+            {signUpError}
+          </Typography>
+        )}
+      </div>
+
       <Paper elevation={0} style={{
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: "center",
-        justifyContent: "flex-start",
-        gap: spacing(3),
+        justifyContent: "space-between",
+        rowGap: spacing(3),
       }}>
         <FormControl style={{ width: spacing(55) }}>
           <FormLabel style={{ marginBottom: spacing(1) }}>First Name</FormLabel>
@@ -314,12 +326,6 @@ const DoctorSignUp = () => {
         </FormControl>
 
       </Paper>
-
-      <div style={{ height: spacing(6), marginTop: spacing(2) }}>
-        {!!signUpError && (
-          <Typography variant="subtitle1" color="error" textAlign="center">{signUpError}</Typography>
-        )}
-      </div>
 
     </section>
   );

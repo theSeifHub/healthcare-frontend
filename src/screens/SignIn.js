@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Paper, Typography, TextField, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import theme from "../theme";
-import stores from "../store";
+import stores from "../stores";
 
 const SignIn = () => {
   const { spacing } = theme;

@@ -10,7 +10,7 @@ export default class DoctorsStore {
     makeAutoObservable(this);
   }
 
-  async createDoctor(newDrData) {
+  async createNewDoctor(newDrData) {
     try {
       const { data: drRes } = await axiosInstance.post(createDoctor, newDrData, {
         headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }

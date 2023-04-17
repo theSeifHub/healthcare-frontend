@@ -77,7 +77,12 @@ const App = () => {
       <NavBar />
       <Routes>
         {routes.map(r => (
-          <Route path={r.path} element={r.element} exact={r.exact} />
+          <Route
+            key={r.path}
+            path={r.path}
+            element={r.element}
+            exact={r.exact}
+          />
         ))}
       </Routes>
       <Footer />
