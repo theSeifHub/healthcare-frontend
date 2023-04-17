@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import axios from 'axios';
-import { login, register } from "../endpoints";
+import axiosInstance from '../axios/instance';
+import { login, registerUser } from "../axios/endpoints";
 
 
 export default class AuthStore {
@@ -46,9 +46,8 @@ export default class AuthStore {
         email,
         password,
       };
-      console.log("login data >> ", data);
-      const response = await axios.post(login, data);
-      console.log("login res >> ", response.data);
+      const response = await axiosInstance.post(login, data);
+      console.log("Logged user in successfully >> ", response.data);
       localStorage.setItem('currentUser', JSON.stringify(response.data));
       this.setAccessToken(response.data.access_token);
       this.setRefreshToken(response.data.refresh_token);
@@ -60,11 +59,10 @@ export default class AuthStore {
     }
   }
 
-  async registerDoctor(newDrData) {
+  async registerNewUser(newUserData) {
     try {
-      console.log("newDrData >> ", newDrData)
-      const response = await axios.post(register, newDrData);
-      console.log("register res >> ", response.data);
+      const response = await axiosInstance.post(registerUser, newUserData);
+      console.log("Registered user successfully >> ", response.data);
       return Promise.resolve(response.data);
     } catch (error) {
       console.error(error.response);
