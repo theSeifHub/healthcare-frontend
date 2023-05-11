@@ -6,7 +6,8 @@ import Home from './Home';
 import AboutUs from './AboutUs';
 import Doctors from './Doctors';
 import Booking from './Booking';
-import Services from './Services';
+import DoctorServicesLanding from './DoctorServicesLanding';
+import PatientServicesLanding from './PatientServicesLanding';
 import ContactUs from './ContactUs';
 
 export {
@@ -18,6 +19,7 @@ export {
   AboutUs,
   Doctors,
   Booking,
-  Services,
+  DoctorServicesLanding,
+  PatientServicesLanding,
   ContactUs
 };

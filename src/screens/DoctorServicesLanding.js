@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import theme from "../theme";
 import { Paper, Typography, Button } from "@mui/material";
 
-const Services = () => {
+const DoctorServicesLanding = () => {
   const {
     spacing
   } = theme;
@@ -51,4 +51,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default DoctorServicesLanding;

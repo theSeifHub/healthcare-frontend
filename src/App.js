@@ -12,7 +12,8 @@ import {
   SignUp,
   DoctorSignUp,
   PatientSignUp,
-  Services,
+  DoctorServicesLanding,
+  PatientServicesLanding,
   ContactUs,
 } from './screens';
 import NavBar from "./components/NavBar";
@@ -30,8 +31,13 @@ const routes = [
     exact: true,
   },
   {
-    path: '/services',
-    element: <Services />,
+    path: '/doctor/services',
+    element: <DoctorServicesLanding />,
+    exact: true,
+  },
+  {
+    path: '/patient/services',
+    element: <PatientServicesLanding />,
     exact: true,
   },
   {
