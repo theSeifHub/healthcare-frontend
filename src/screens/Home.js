@@ -3,9 +3,8 @@ import theme from "../theme";
 import { Link as RouterLink } from "react-router-dom";
 import { Paper, Typography } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CustomBadge from "../components/CustomBadge";
+import DoctorCard from "../components/DoctorCard";
 
 const appointmentsItems = [
   {
@@ -55,34 +54,23 @@ const specialities = [
 
 const doctors = [
   {
-    name: 'Dr. Marwan Mohamed',
+    first_name: "Marwan",
+    last_name: "Mohamed",
+    association_number: "12345",
     speciality: 'Ophthalmologist',
-    clinicAddress: 'Assiut, Gomhorya Street',
-    appointments: {
-      days: ['Saturday', 'Monday', 'Wednesday'],
-      from: '11 am',
-      to: '6 pm'
-    },
+
   },
   {
-    name: 'Dr. Nourhan Mamdouh',
+    first_name: "Nourhan",
+    last_name: "Mohamed",
+    association_number: "12345",
     speciality: 'General Practitioner',
-    clinicAddress: 'Assiut, El-Nemes Street',
-    appointments: {
-      days: ['Sunday', 'Tuesday', 'Thursday'],
-      from: '12 pm',
-      to: '8 pm'
-    },
   },
   {
-    name: 'Dr. Alaa Mahmoud',
+    first_name: "Alaa",
+    last_name: "Mahmoud",
+    association_number: "12345",
     speciality: 'Obstetrician and Gynecologist',
-    clinicAddress: 'Assiut, El-Mohaza Street',
-    appointments: {
-      days: ['Wednesday', 'Thursday', 'Friday'],
-      from: '11 am',
-      to: '6 pm'
-    },
   },
 ];
 
@@ -230,54 +218,7 @@ const Home = () => {
           gap: spacing(5),
         }}>
           {doctors.map((doc, index) => (
-            <Paper key={index} style={{
-              width: spacing(40),
-              background: background.default,
-              display: "flex",
-              flexDirection: "column",
-              border: `${spacing(2)} solid #fff`,
-              padding: spacing(3),
-            }} >
-              <img
-                alt="doctor icon"
-                src={require('../assets/img/doctor-placeholder.png')}
-                width={spacing(20)} height={spacing(24)}
-                style={{ margin: spacing(5), alignSelf: "center" }}
-              />
-              <Typography variant="h5" textAlign='center'>{doc.name}</Typography>
-              <Typography
-                variant="body1"
-                fontFamily='sans-serif'
-                fontSize={spacing(2)}
-                textAlign='center'
-              >
-                {doc.speciality}
-              </Typography>
-              <Typography
-                variant="body1"
-                fontFamily='sans-serif'
-                fontSize={spacing(2)}
-              >
-                <LocationOnIcon style={{ marginRight: spacing(2), marginTop: spacing(2) }} />
-                {doc.clinicAddress}
-              </Typography>
-              <Typography
-                variant="body1"
-                fontFamily='sans-serif'
-                fontSize={spacing(2)}
-              >
-                <AccessTimeIcon style={{ marginRight: spacing(2), marginTop: spacing(2) }} />
-                {doc.appointments.days.join(', ')}
-              </Typography>
-              <Typography
-                variant="body1"
-                fontFamily='sans-serif'
-                fontSize={spacing(2)}
-                style={{ marginLeft: spacing(5) }}
-              >
-                {`from ${doc.appointments.from} to ${doc.appointments.to}`}
-              </Typography>
-            </Paper>
+            <DoctorCard doctorData={doc} key={index} speciality={{ name: doc.speciality }} />
           ))}
         </div>
       </section>
