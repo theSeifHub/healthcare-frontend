@@ -5,74 +5,11 @@ import { Paper, Typography } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CustomBadge from "../components/CustomBadge";
 import DoctorCard from "../components/DoctorCard";
-
-const appointmentsItems = [
-  {
-    img: 'view_doctor.png',
-    alt: 'view doctor',
-    description: 'Share your health concern here and we shall assign you a top doctor across the North East',
-  },
-  {
-    img: 'book_visit.png',
-    alt: 'book a visit',
-    description: 'Book your time slot with doctor from your comfort zone',
-  },
-  {
-    img: 'find_doctor.png',
-    alt: 'find a doctor',
-    description: 'With more than 1000+ doctors and on mission to provide best care Health Care Service',
-  },
-];
-
-const specialities = [
-  {
-    img: '1-kidney.png',
-    alt: 'kidney',
-    title: 'Urology',
-  },
-  {
-    img: '2-brain.png',
-    alt: 'brain',
-    title: 'Neurology',
-  },
-  {
-    img: '3-bone.png',
-    alt: 'bone',
-    title: 'Orthopedics',
-  },
-  {
-    img: '4-heart.png',
-    alt: 'heart',
-    title: 'Cardiology',
-  },
-  {
-    img: '5-teeth.png',
-    alt: 'teeth',
-    title: 'Dentistry',
-  },
-];
-
-const doctors = [
-  {
-    first_name: "Marwan",
-    last_name: "Mohamed",
-    association_number: "12345",
-    speciality: 'Ophthalmologist',
-
-  },
-  {
-    first_name: "Nourhan",
-    last_name: "Mohamed",
-    association_number: "12345",
-    speciality: 'General Practitioner',
-  },
-  {
-    first_name: "Alaa",
-    last_name: "Mahmoud",
-    association_number: "12345",
-    speciality: 'Obstetrician and Gynecologist',
-  },
-];
+import {
+  appointmentsPreview,
+  specialitiesPreview,
+  doctorsPreview,
+} from "../constants";
 
 const Home = () => {
   const {
@@ -136,7 +73,7 @@ const Home = () => {
           Discover The Online Appointment!
         </Typography>
         <div style={{ display: "flex", alignItems: "center", gap: spacing(5) }}>
-          {appointmentsItems.map((item, index) => (
+          {appointmentsPreview.map((item, index) => (
             <Paper key={index} style={{
               height: spacing(55),
               flex: 1,
@@ -170,7 +107,7 @@ const Home = () => {
           Clinics and Specialties
         </Typography>
         <div style={{ display: "flex", justifyContent: "center", gap: spacing(6) }}>
-          {specialities.map((spec, index) => (
+          {specialitiesPreview.map((spec, index) => (
             <div key={index}>
               <CustomBadge badgeContent={''} color="secondary">
                 <Paper elevation={3} style={{
@@ -217,7 +154,7 @@ const Home = () => {
           justifyContent: "center",
           gap: spacing(5),
         }}>
-          {doctors.map((doc, index) => (
+          {doctorsPreview.map((doc, index) => (
             <DoctorCard doctorData={doc} key={index} speciality={{ name: doc.speciality }} />
           ))}
         </div>

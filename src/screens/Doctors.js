@@ -24,7 +24,7 @@ const Doctors = () => {
         .getSpecialitiesList()
         .then(res => setSpecialities(res))
     ]);
-  }, []);
+  }, [clinicId]);
 
   return (
     <main style={{

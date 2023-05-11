@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import {
@@ -16,46 +16,21 @@ import SendIcon from '@mui/icons-material/Send';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import theme from "../theme";
 import stores from "../stores";
-
-const Specialities = [
-  {
-    id: 'GeneralSurgeon',
-    title: 'General Surgeon',
-  },
-  {
-    id: 'EarNose',
-    title: 'Ear and Nose',
-  },
-  {
-    id: 'Dentist',
-    title: 'Dentist',
-  },
-  {
-    id: 'ObstetricianGynecologist',
-    title: 'Obstetrician and Gynecologist',
-  },
-  {
-    id: 'Ophthalmologist',
-    title: 'Ophthalmologist',
-  },
-  {
-    id: 'Internist',
-    title: 'Internist',
-  },
-];
-
-const getDateYearsAgo = (noOfYearsAgo) => {
-  const today = new Date();
-  let dateYearsAgo = new Date();
-  dateYearsAgo.setFullYear(today.getFullYear() - noOfYearsAgo);
-  return dateYearsAgo;
-}
+import { getDateYearsAgo } from "../utils/dateUtils";
 
 const DoctorSignUp = () => {
   const {
     spacing,
     palette: { background }
   } = theme;
+
+  const [specialities, setSpecialities] = useState([]);
+
+  useEffect(() => {
+    stores.doctorsStore
+      .getSpecialitiesList()
+      .then(res => setSpecialities(res))
+  }, []);
 
   const navigate = useNavigate();
 
@@ -70,7 +45,7 @@ const DoctorSignUp = () => {
   const [userNameError, setUserNameError] = useState('');
   const [syndicateId, setSyndicateId] = useState('');
   const [syndicateIdError, setSyndicateIdError] = useState('');
-  const [speciality, setSpeciality] = useState('');
+  const [speciality, setSpeciality] = useState(-1);
   const [specialityError, setSpecialityError] = useState('');
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState('');
@@ -92,7 +67,7 @@ const DoctorSignUp = () => {
     setLastNameError(lastName ? '' : 'Last name is required');
     setUserNameError(userName ? '' : 'Username is required');
     setSyndicateIdError(syndicateId ? '' : 'Syndicate ID is required');
-    setSpecialityError(speciality ? '' : 'Speciality is missing');
+    setSpecialityError(speciality > -1 ? '' : 'Speciality is missing');
     setPhoneError(phone ? '' : 'Phone is missing');
     setDateOfBirthError(dateOfBirth ? '' : 'Date of birth is missing');
     setEmailError(email ? '' : 'Email is required');
@@ -108,7 +83,7 @@ const DoctorSignUp = () => {
       && firstName
       && middleName
       && lastName
-      && speciality
+      && speciality > -1
     ) {
       try {
         const userData = {
@@ -127,7 +102,7 @@ const DoctorSignUp = () => {
           phone,
           date_of_birth: dateOfBirth,
           user: userRes.id,
-          // speciality, // TODO fetch specialities list
+          speciality,
           association_number: syndicateId,
         };
 
@@ -246,8 +221,8 @@ const DoctorSignUp = () => {
             error={!!specialityError}
           >
             <MenuItem value='none' disabled>Select Speciality</MenuItem>
-            {Specialities.map((cl) => (
-              <MenuItem key={cl.id} value={cl.id}>{cl.title}</MenuItem>
+            {specialities.map((sp) => (
+              <MenuItem key={sp.id} value={sp.id}>{sp.name}</MenuItem>
             ))}
           </Select>
           <FormHelperText error>{specialityError}</FormHelperText>

@@ -13,13 +13,7 @@ import {
 } from "@mui/material";
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import theme from "../theme";
-
-const getMinDate = () => {
-  const today = new Date();
-  let after2Days = new Date();
-  after2Days.setDate(today.getDate() + 2);
-  return after2Days;
-}
+import { getDateDaysAhead } from "../utils/dateUtils";
 
 const Booking = () => {
   const {
@@ -91,7 +85,7 @@ const Booking = () => {
                 setAppointment(evt)
               }}
               inputFormat="ddd: DD/MM/YYYY hh:mm A"
-              minDate={dayjs(getMinDate())}
+              minDate={dayjs(getDateDaysAhead(2))}
               renderInput={params => (
                 <TextField
                   {...params}
