@@ -15,7 +15,10 @@ const SignIn = () => {
   const [passwordError, setPasswordError] = useState('');
   const [loginError, setLoginError] = useState('');
 
+  const [attemptingLogin, setAttemptingLogin] = useState(false);
+
   const handleLogin = async () => {
+    setAttemptingLogin(true);
     setEmailError(email ? '' : 'Email is required');
     setPasswordError(password ? '' : 'Password is required');
     if (email && password) {
@@ -27,6 +30,7 @@ const SignIn = () => {
         setLoginError(`${err.status}: ${err.data.detail}`);
       }
     }
+    setAttemptingLogin(false);
   };
 
   return (
@@ -89,8 +93,9 @@ const SignIn = () => {
         color="secondary"
         size="large"
         onClick={handleLogin}
+        disabled={attemptingLogin}
       >
-        Login
+        {attemptingLogin ? "Logging In ..." : "Login"}
       </Button>
     </section>
   );

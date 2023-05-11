@@ -52,7 +52,10 @@ const PatientSignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
+  const [attemptingSignup, setAttemptingSignup] = useState(false);
+
   const handleRegister = async () => {
+    setAttemptingSignup(true);
     setFirstNameError(firstName ? '' : 'First name is required');
     setMiddleNameError(middleName ? '' : 'Middle name is required');
     setLastNameError(lastName ? '' : 'Last name is required');
@@ -100,6 +103,7 @@ const PatientSignUp = () => {
         setSignUpError(`${err.status}: ${err.data[Object.keys(err.data)[0]]}`);
       }
     }
+    setAttemptingSignup(false);
   };
 
   return (
@@ -270,7 +274,8 @@ const PatientSignUp = () => {
               marginLeft: "auto",
               marginTop: "auto",
             }}
-          >Done</Button>
+            disabled={attemptingSignup}
+          >{attemptingSignup ? "Signing Up ..." : "Done"}</Button>
         </FormControl>
 
       </Paper>
