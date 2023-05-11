@@ -4,6 +4,7 @@ import { AppBar, Button, Typography } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import theme from "../theme";
 import stores from "../stores";
+import NavBarLink from "./NavBarLink";
 
 const pageRoutes = [
 	{
@@ -15,16 +16,8 @@ const pageRoutes = [
 		path: "/about-us"
 	},
 	{
-		name: "Services",
-		path: "/services"
-	},
-	{
 		name: "Doctors",
 		path: "/doctors"
-	},
-	{
-		name: "Book",
-		path: "/booking"
 	}
 ];
 
@@ -36,6 +29,8 @@ const NavBar = () => {
 
 	const navigate = useNavigate();
 
+	const { authStore } = stores;
+
 	return (
 		<AppBar
 			style={{
@@ -46,7 +41,7 @@ const NavBar = () => {
 				justifyContent: "space-between"
 			}}
 		>
-			<nav style={{ width: spacing(85) }}>
+			<nav>
 				<ul
 					style={{
 						listStyleType: "none",
@@ -60,25 +55,23 @@ const NavBar = () => {
 					<li>
 						<img alt="logo" src={require("../assets/img/navbar-logo.png")} width={150} height={35} />
 					</li>
+
 					{pageRoutes.map((pr, index) => (
-						<li key={index}>
-							<RouterLink to={pr.path} style={{ textDecoration: "none" }}>
-								<Typography variant="h6" color={primary.contrastText}>
-									{pr.name}
-								</Typography>
-							</RouterLink>
-						</li>
+						<NavBarLink key={index} path={pr.path} label={pr.name} />
 					))}
+
+					{authStore.user && (
+						<NavBarLink path={authStore.user.doctor ? "/doctor/services" : "/patient/services"} label={"Services"} />
+					)}
 				</ul>
 			</nav>
 			<div style={{ width: spacing(30), display: "flex", alignItems: "center", gap: spacing(2) }}>
-				{stores.authStore.user ? (
+				{authStore.user ? (
 					<Button
 						variant="contained"
 						size="large"
 						onClick={() => {
-							console.log("signout clicked");
-							stores.authStore.logout();
+							authStore.logout();
 							navigate("/sign-in");
 						}}
 						color="primary"
