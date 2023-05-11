@@ -110,14 +110,14 @@ const PatientServicesLanding = () => {
               fontFamily='sans-serif'
               fontWeight="bold"
             >
-              Several Departments
+              Several Clinics
             </Typography>
           </div>
           <Button
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => navigate('/doctors')}
+            onClick={() => navigate('/patient/services/clinics')}
             style={{ width: spacing(15), borderRadius: spacing(1), alignSelf: "end" }}
           >
             View

@@ -6,6 +6,7 @@ export const getCurrentUser = "/user/get-user/";
 // doctors
 export const createDoctor = "/doctor/create/";
 export const getDoctorsList = "/doctor/index/";
+export const filterDoctorsBySpeciality = (specialityId) => `/doctor/index/?speciality=${specialityId}`;
 export const getSpecialitiesList = "/doctor/list/";
 
 // patients

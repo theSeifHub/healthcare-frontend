@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  Paper,
-  Button,
-} from "@mui/material";
+import { useSearchParams } from "react-router-dom";
 import theme from "../theme";
 import DoctorCard from "../components/DoctorCard";
 import stores from "../stores";
-
-
 
 const Doctors = () => {
   const {
     spacing,
   } = theme;
 
+  const [searchParams] = useSearchParams();
+  const clinicId = searchParams.get("clinic");
+
   const [doctors, setDoctors] = useState([]);
   const [specialities, setSpecialities] = useState([]);
+
   useEffect(() => {
-    Promise.all([stores.doctorsStore.getDoctorsList().then(res => {
-      setDoctors(res);
-    }),
-    stores.doctorsStore.getSpecialitiesList().then(res => {
-      setSpecialities(res);
-    })])
+    Promise.all([
+      stores.doctorsStore
+        .getDoctorsList(clinicId)
+        .then(res => setDoctors(res)),
+      stores.doctorsStore
+        .getSpecialitiesList()
+        .then(res => setSpecialities(res))
+    ]);
   }, []);
 
   return (

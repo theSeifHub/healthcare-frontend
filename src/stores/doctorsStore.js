@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import axiosInstance from '../axios/instance';
-import { createDoctor, getDoctorsList, getSpecialitiesList } from "../axios/endpoints";
+import { createDoctor, filterDoctorsBySpeciality, getDoctorsList, getSpecialitiesList } from "../axios/endpoints";
 import stores from '.';
 
 
@@ -15,7 +15,7 @@ export default class DoctorsStore {
       const { data: drRes } = await axiosInstance.post(createDoctor, newDrData, {
         headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
       });
-      console.log("Created doctor successfully >> ", drRes);
+
       return Promise.resolve(drRes);
     } catch (error) {
       console.error(error.response);
@@ -23,12 +23,23 @@ export default class DoctorsStore {
     }
   }
 
-  async getDoctorsList() {
+  async getDoctorsList(specialityId) {
+    const headers = { Authorization: `Bearer ${stores.authStore.accessToken}` };
     try {
-      const { data: drsListRes } = await axiosInstance.get(getDoctorsList, {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
-      console.log("Got doctors list successfully >> ", drsListRes);
+      let drsListRes;
+
+      if (specialityId) {
+        const { data } = await axiosInstance.get(filterDoctorsBySpeciality(specialityId), {
+          headers
+        });
+        drsListRes = data;
+      } else {
+        const { data } = await axiosInstance.get(getDoctorsList, {
+          headers
+        });
+        drsListRes = data;
+      }
+
       return Promise.resolve(drsListRes);
     } catch (error) {
       console.error(error.response);
@@ -41,7 +52,7 @@ export default class DoctorsStore {
       const { data: specsListRes } = await axiosInstance.get(getSpecialitiesList, {
         headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
       });
-      console.log("Got specialities list successfully >> ", specsListRes);
+
       return Promise.resolve(specsListRes);
     } catch (error) {
       console.error(error.response);
