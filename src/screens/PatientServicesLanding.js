@@ -69,7 +69,7 @@ const PatientServicesLanding = () => {
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/patient/services/book?service=injection")}
             style={{ width: spacing(15), borderRadius: spacing(1), alignSelf: "end" }}
           >
             Order
@@ -159,7 +159,7 @@ const PatientServicesLanding = () => {
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/patient/services/book?service=solution")}
             style={{ width: spacing(15), borderRadius: spacing(1), alignSelf: "end" }}
           >
             Order
@@ -208,7 +208,7 @@ const PatientServicesLanding = () => {
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/patient/services/book?service=wound_dressing")}
             style={{ width: spacing(15), borderRadius: spacing(1), alignSelf: "end" }}
           >
             Order

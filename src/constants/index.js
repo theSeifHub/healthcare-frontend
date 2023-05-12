@@ -95,18 +95,18 @@ export const doctorsPreview = [
 
 export const patientServicesData = {
   injection: {
-    title: "injection",
-    imagePath: "",
     id: "injection",
+    title: "Giving an injection",
+    image: "injection.png",
   },
   solution: {
-    title: "solution",
-    imagePath: "",
     id: "solution",
+    title: "Solutions suspension",
+    image: "solution.png",
   },
   wound_dressing: {
-    title: "wound_dressing",
-    imagePath: "",
     id: "wound_dressing",
+    title: "Wound Sterilization",
+    image: "wound_dressing.png",
   },
 }

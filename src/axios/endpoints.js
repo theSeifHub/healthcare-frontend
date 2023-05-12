@@ -11,3 +11,7 @@ export const getSpecialitiesList = "/doctor/list/";
 
 // patients
 export const createPatient = "/patient/create/";
+
+// services
+export const createPatientService = "/service/create/";
+

@@ -10,6 +10,7 @@ import DoctorServicesLanding from './DoctorServicesLanding';
 import PatientServicesLanding from './PatientServicesLanding';
 import ContactUs from './ContactUs';
 import Clinics from './Clinics';
+import PatientServiceBook from './PatientServiceBook';
 
 export {
   SignIn,
@@ -22,6 +23,7 @@ export {
   Booking,
   DoctorServicesLanding,
   PatientServicesLanding,
+  PatientServiceBook,
   ContactUs,
   Clinics,
 };

@@ -14,6 +14,7 @@ import {
   PatientSignUp,
   DoctorServicesLanding,
   PatientServicesLanding,
+  PatientServiceBook,
   ContactUs,
   Clinics,
 } from './screens';
@@ -39,6 +40,11 @@ const routes = [
   {
     path: '/patient/services',
     element: <PatientServicesLanding />,
+    exact: true,
+  },
+  {
+    path: '/patient/services/book',
+    element: <PatientServiceBook />,
     exact: true,
   },
   {
