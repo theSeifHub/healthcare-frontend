@@ -110,3 +110,30 @@ export const patientServicesData = {
     image: "wound_dressing.png",
   },
 }
+
+export const doctorServicesListings = [
+  {
+    id: "bloodbank",
+    image: "blood-bank-logo.png",
+    title: "Blood Bank",
+    description: "A storehouse for storing blood collected from blood donors",
+  },
+  {
+    id: "incubator",
+    image: "nurseries-logo.png",
+    title: "Nurseries",
+    description: "Contains adequate nutrition and oxygen, and doctors can monitor children and follow their conditions",
+  },
+  {
+    id: "icu",
+    image: "care-room-logo.png",
+    title: "Care Room",
+    description: "Characterized by the ingenuity of all patients to help them take treatment, whether inside or outside the hospital and the full care of patients",
+  },
+  {
+    id: "surgery",
+    image: "surgical-room-logo.png",
+    title: "Surgical Room",
+    description: "Characterized by its large size and cleanliness, equipped with all the devices used in the anesthesia process",
+  },
+]

@@ -61,7 +61,7 @@ const NavBar = () => {
 					))}
 
 					{authStore.user && (
-						<NavBarLink path={authStore.user.doctor ? "/doctor/services" : "/patient/services"} label={"Services"} />
+						<NavBarLink path={authStore.user.doctor ? "/doctor/services/land" : "/patient/services"} label="Services" />
 					)}
 				</ul>
 			</nav>

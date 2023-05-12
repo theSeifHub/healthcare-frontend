@@ -33,7 +33,7 @@ const DoctorServicesLanding = () => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/doctor/services')}
           style={{ width: spacing(25), borderRadius: spacing(5), alignSelf: "center" }}
         >
           Click Here

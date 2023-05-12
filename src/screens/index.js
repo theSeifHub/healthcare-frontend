@@ -11,6 +11,7 @@ import PatientServicesLanding from './PatientServicesLanding';
 import ContactUs from './ContactUs';
 import Clinics from './Clinics';
 import PatientServiceBook from './PatientServiceBook';
+import DoctorServices from './DoctorServices';
 
 export {
   SignIn,
@@ -22,6 +23,7 @@ export {
   Doctors,
   Booking,
   DoctorServicesLanding,
+  DoctorServices,
   PatientServicesLanding,
   PatientServiceBook,
   ContactUs,

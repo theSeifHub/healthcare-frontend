@@ -17,6 +17,7 @@ import {
   PatientServiceBook,
   ContactUs,
   Clinics,
+  DoctorServices,
 } from './screens';
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -33,8 +34,13 @@ const routes = [
     exact: true,
   },
   {
-    path: '/doctor/services',
+    path: '/doctor/services/land',
     element: <DoctorServicesLanding />,
+    exact: true,
+  },
+  {
+    path: '/doctor/services',
+    element: <DoctorServices />,
     exact: true,
   },
   {
