@@ -1,10 +1,17 @@
 import { makeAutoObservable } from 'mobx';
 import axiosInstance from '../axios/instance';
-import { createDoctor, filterDoctorsBySpeciality, getDoctorsList, getSpecialitiesList } from "../axios/endpoints";
+import {
+  createDoctor,
+  filterDoctorsBySpeciality,
+  getDoctorsList,
+  getSpecialitiesList,
+} from "../axios/endpoints";
 import stores from '.';
 
 
 export default class DoctorsStore {
+  doctorsList = [];
+  specialitiesList = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -26,21 +33,17 @@ export default class DoctorsStore {
   async getDoctorsList(specialityId) {
     const headers = { Authorization: `Bearer ${stores.authStore.accessToken}` };
     try {
-      let drsListRes;
-
       if (specialityId) {
         const { data } = await axiosInstance.get(filterDoctorsBySpeciality(specialityId), {
           headers
         });
-        drsListRes = data;
+        this.doctorsList = data;
       } else {
         const { data } = await axiosInstance.get(getDoctorsList, {
           headers
         });
-        drsListRes = data;
+        this.doctorsList = data;
       }
-
-      return Promise.resolve(drsListRes);
     } catch (error) {
       console.error(error.response);
       throw error.response;
@@ -52,8 +55,7 @@ export default class DoctorsStore {
       const { data: specsListRes } = await axiosInstance.get(getSpecialitiesList, {
         headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
       });
-
-      return Promise.resolve(specsListRes);
+      this.specialitiesList = specsListRes;
     } catch (error) {
       console.error(error.response);
       throw error.response;

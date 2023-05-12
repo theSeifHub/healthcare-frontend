@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
 import { useSearchParams } from "react-router-dom";
 import theme from "../theme";
 import DoctorCard from "../components/DoctorCard";
 import stores from "../stores";
+import Spinner from "../components/Spinner";
 
 const Doctors = () => {
   const {
@@ -12,19 +14,26 @@ const Doctors = () => {
   const [searchParams] = useSearchParams();
   const clinicId = searchParams.get("clinic");
 
-  const [doctors, setDoctors] = useState([]);
-  const [specialities, setSpecialities] = useState([]);
+  const [loadingData, setLoadingData] = useState(true);
 
   useEffect(() => {
     Promise.all([
-      stores.doctorsStore
-        .getDoctorsList(clinicId)
-        .then(res => setDoctors(res)),
-      stores.doctorsStore
-        .getSpecialitiesList()
-        .then(res => setSpecialities(res))
-    ]);
+      stores.doctorsStore.getDoctorsList(clinicId),
+      stores.doctorsStore.getSpecialitiesList(),
+    ]).then(res => setLoadingData(false));
   }, [clinicId]);
+
+  if (loadingData) {
+    return <Spinner size="large" />
+  }
+
+  const findSpec = async (drSpecialityId) => {
+    const speciality = await stores.doctorsStore.specialitiesList.find(
+      (sp) => sp.id === drSpecialityId
+    );
+    return speciality;
+  }
+
 
   return (
     <main style={{
@@ -34,11 +43,11 @@ const Doctors = () => {
       flexWrap: "wrap",
       gap: spacing(3),
     }}>
-      {doctors.map((dr) =>
+      {stores.doctorsStore.doctorsList.map((dr) =>
         <DoctorCard
           key={dr.id}
           doctorData={dr}
-          speciality={specialities.find((sp) => sp.id === dr.speciality)}
+          speciality={findSpec(dr.speciality)}
           canBook
         />
       )}
@@ -46,4 +55,4 @@ const Doctors = () => {
   );
 };
 
-export default Doctors;
+export default observer(Doctors);
