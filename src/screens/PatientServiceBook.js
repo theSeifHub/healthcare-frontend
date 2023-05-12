@@ -8,13 +8,13 @@ import {
   FormLabel,
   Typography,
 } from "@mui/material";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import theme from "../theme";
 import stores from "../stores";
 import { getDateDaysAhead } from "../utils/dateUtils";
 import { patientServicesData } from "../constants";
+import { SubmitSuccess } from "../components/SubmitSuccess";
 
 const PatientServiceBook = () => {
   const { spacing } = theme;
@@ -91,16 +91,7 @@ const PatientServiceBook = () => {
           margin: spacing(4),
           border: successfulSubmission ? "green dotted" : "",
         }}>
-          {successfulSubmission ? (
-            <>
-              <Typography variant="h5" fontWeight="700" style={{ color: "green", marginTop: spacing(3) }}>
-                Submitted Successfully
-              </Typography>
-              <CheckCircleOutlineIcon color="success" style={{
-                width: spacing(20), height: spacing(20)
-              }} />
-            </>
-          ) : (
+          {successfulSubmission ? (<SubmitSuccess />) : (
             <>
               <div style={{ height: spacing(5) }}>
                 {!!bookingError && (
