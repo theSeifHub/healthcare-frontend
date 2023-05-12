@@ -18,6 +18,7 @@ import {
   ContactUs,
   Clinics,
   DoctorServices,
+  BloodBankBooking,
 } from './screens';
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -43,6 +44,26 @@ const routes = [
     element: <DoctorServices />,
     exact: true,
   },
+  {
+    path: '/doctor/services/bloodbank',
+    element: <BloodBankBooking />,
+    exact: true,
+  },
+  // {
+  //   path: '/doctor/services/incubator',
+  //   element: <NursingBook />,
+  //   exact: true,
+  // },
+  // {
+  //   path: '/doctor/services/icu',
+  //   element: <CareRoomBook />,
+  //   exact: true,
+  // },
+  // {
+  //   path: '/doctor/services/surgery',
+  //   element: <SurgeryBook />,
+  //   exact: true,
+  // },
   {
     path: '/patient/services',
     element: <PatientServicesLanding />,

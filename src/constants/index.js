@@ -137,3 +137,7 @@ export const doctorServicesListings = [
     description: "Characterized by its large size and cleanliness, equipped with all the devices used in the anesthesia process",
   },
 ]
+
+export const bloodTypes = [
+  'A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'
+];
