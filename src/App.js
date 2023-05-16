@@ -19,6 +19,7 @@ import {
   Clinics,
   DoctorServices,
   BloodBankBooking,
+  NurseryBooking,
 } from './screens';
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -49,11 +50,11 @@ const routes = [
     element: <BloodBankBooking />,
     exact: true,
   },
-  // {
-  //   path: '/doctor/services/incubator',
-  //   element: <NursingBook />,
-  //   exact: true,
-  // },
+  {
+    path: '/doctor/services/incubator',
+    element: <NurseryBooking />,
+    exact: true,
+  },
   // {
   //   path: '/doctor/services/icu',
   //   element: <CareRoomBook />,

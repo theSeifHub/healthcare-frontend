@@ -2,6 +2,9 @@ import { makeAutoObservable } from 'mobx';
 import axiosInstance from '../axios/instance';
 import {
   createBloodBankService,
+  createIncubatorService,
+  createICUService,
+  createSurgeryRoomService,
 } from "../axios/endpoints";
 import stores from '.';
 
@@ -12,10 +15,27 @@ export default class DoctorServicesStore {
     makeAutoObservable(this);
   }
 
-  async createNewBloodBankService(newServiceData) {
+  getServiceEndpoint(serviceId) {
+    switch (serviceId) {
+      case "bloodbank":
+        return createBloodBankService;
+      case "incubator":
+        return createIncubatorService;
+      case "icu":
+        return createICUService;
+      case "surgery":
+        return createSurgeryRoomService;
+      default:
+        break;
+    }
+  }
+
+  async createNewDoctorService(newServiceData, serviceId) {
     try {
+      const endpoint = this.getServiceEndpoint(serviceId);
+
       const { data: serviceRes } = await axiosInstance.post(
-        createBloodBankService,
+        endpoint,
         newServiceData,
         {
           headers: { Authorization: `Bearer ${stores.authStore.accessToken}` },
@@ -27,5 +47,4 @@ export default class DoctorServicesStore {
       throw error.response;
     }
   }
-
 };

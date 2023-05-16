@@ -11,7 +11,11 @@ export const getSpecialitiesList = "/doctor/list/";
 
 // doctor services
 export const createBloodBankService = "/bloodbank/create/";
+export const createIncubatorService = "/incubator/create/";
+export const createICUService = "/icu/create/";
+export const createSurgeryRoomService = "/surgery/create/";
 
 // patients
 export const createPatient = "/patient/create/";
+export const getPatientsList = "/patient/index/";
 export const createPatientService = "/service/create/";

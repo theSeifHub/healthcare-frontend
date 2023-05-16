@@ -38,7 +38,9 @@ const BloodBankBooking = () => {
         blood_type: bloodType,
         amount: noOfBags,
       };
-      const res = await stores.doctorServicesStore.createNewBloodBankService(newService);
+      const res = await stores.doctorServicesStore.createNewDoctorService(
+        newService, "bloodbank"
+      );
 
       if (res) {
         setSuccessfulSubmission(true);

@@ -141,3 +141,11 @@ export const doctorServicesListings = [
 export const bloodTypes = [
   'A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'
 ];
+
+export const incubators = {
+  "Incubator 2": "nicu_2",
+  "Incubator 1": "nicu_1",
+  "Incubator 3": "nicu_3",
+  "Incubator 4": "nicu_4",
+  "Incubator 5": "nicu_5",
+}

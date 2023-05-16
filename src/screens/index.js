@@ -13,6 +13,7 @@ import Clinics from './Clinics';
 import PatientServiceBook from './PatientServiceBook';
 import DoctorServices from './DoctorServices';
 import BloodBankBooking from './BloodBankBooking';
+import NurseryBooking from './NurseryBooking';
 
 export {
   SignIn,
@@ -30,4 +31,5 @@ export {
   ContactUs,
   Clinics,
   BloodBankBooking,
+  NurseryBooking,
 };
