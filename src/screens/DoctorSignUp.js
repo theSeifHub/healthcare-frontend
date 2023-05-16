@@ -17,6 +17,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import theme from "../theme";
 import stores from "../stores";
 import { getDateYearsAgo } from "../utils/dateUtils";
+import { observer } from "mobx-react-lite";
 
 const DoctorSignUp = () => {
   const {
@@ -24,12 +25,8 @@ const DoctorSignUp = () => {
     palette: { background }
   } = theme;
 
-  const [specialities, setSpecialities] = useState([]);
-
   useEffect(() => {
-    stores.doctorsStore
-      .getSpecialitiesList()
-      .then(res => setSpecialities(res))
+    stores.doctorsStore.getSpecialitiesList()
   }, []);
 
   const navigate = useNavigate();
@@ -45,7 +42,7 @@ const DoctorSignUp = () => {
   const [userNameError, setUserNameError] = useState('');
   const [syndicateId, setSyndicateId] = useState('');
   const [syndicateIdError, setSyndicateIdError] = useState('');
-  const [speciality, setSpeciality] = useState(-1);
+  const [speciality, setSpeciality] = useState("");
   const [specialityError, setSpecialityError] = useState('');
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState('');
@@ -221,7 +218,7 @@ const DoctorSignUp = () => {
             error={!!specialityError}
           >
             <MenuItem value='none' disabled>Select Speciality</MenuItem>
-            {specialities.map((sp) => (
+            {stores.doctorsStore.specialitiesList.map((sp) => (
               <MenuItem key={sp.id} value={sp.id}>{sp.name}</MenuItem>
             ))}
           </Select>
@@ -311,4 +308,4 @@ const DoctorSignUp = () => {
   );
 };
 
-export default DoctorSignUp;
+export default observer(DoctorSignUp);

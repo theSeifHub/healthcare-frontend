@@ -52,9 +52,7 @@ export default class DoctorsStore {
 
   async getSpecialitiesList() {
     try {
-      const { data: specsListRes } = await axiosInstance.get(getSpecialitiesList, {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
+      const { data: specsListRes } = await axiosInstance.get(getSpecialitiesList);
       this.specialitiesList = specsListRes;
     } catch (error) {
       console.error(error.response);
