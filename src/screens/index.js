@@ -14,6 +14,7 @@ import PatientServiceBook from './PatientServiceBook';
 import DoctorServices from './DoctorServices';
 import BloodBankBooking from './BloodBankBooking';
 import NurseryBooking from './NurseryBooking';
+import CareRoomBooking from './CareRoomBooking';
 
 export {
   SignIn,
@@ -32,4 +33,5 @@ export {
   Clinics,
   BloodBankBooking,
   NurseryBooking,
+  CareRoomBooking,
 };

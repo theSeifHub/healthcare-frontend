@@ -149,3 +149,11 @@ export const incubators = {
   "Incubator 4": "nicu_4",
   "Incubator 5": "nicu_5",
 }
+
+export const icuBeds = {
+  "Bed 1": "bed_1",
+  "Bed 2": "bed_2",
+  "Bed 3": "bed_3",
+  "Bed 4": "bed_4",
+  "Bed 5": "bed_5",
+}
