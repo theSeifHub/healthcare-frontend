@@ -132,7 +132,7 @@ const CareRoomBooking = () => {
                   error={!!bedError}
                   style={{ width: spacing(45) }}
                 >
-                  <MenuItem value='none' disabled>Incubator</MenuItem>
+                  <MenuItem value='none' disabled>Bed</MenuItem>
                   {Object.entries(icuBeds).map(([name, id]) => (
                     <MenuItem key={id} value={id}>{name}</MenuItem>
                   ))}
