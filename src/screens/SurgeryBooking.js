@@ -14,51 +14,66 @@ import {
 import theme from "../theme";
 import stores from "../stores";
 import { useNavigate } from "react-router-dom";
-import { incubators } from "../constants";
+import { surgeryRooms, surgeryTypes } from "../constants";
 import { SubmitSuccess } from "../components/SubmitSuccess";
 import dayjs from 'dayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { getDateDaysAhead } from "../utils/dateUtils";
 
-const NurseryBooking = () => {
+const SurgeryBooking = () => {
   useEffect(() => {
     stores.patientsStore.getPatientsList();
+    stores.doctorsStore.getDoctorsList();
   }, []);
 
   const { spacing } = theme;
   const navigate = useNavigate();
 
+
+  const [doctors, setDoctors] = useState([]);
+  const [doctorsError, setDoctorsError] = useState("");
+
   const [patient, setPatient] = useState("");
   const [patientError, setPatientError] = useState("");
-  const [incubator, setIncubator] = useState("");
-  const [incubatorError, setIncubatorError] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [startDateError, setStartDateError] = useState('');
-  const [endDate, setEndDate] = useState(null);
-  const [endDateError, setEndDateError] = useState('');
+
+  const [room, setRoom] = useState("");
+  const [roomError, setRoomError] = useState("");
+
+  const [surgeryType, setSurgeryType] = useState("");
+  const [surgeryTypeError, setSurgeryTypeError] = useState("");
+
+  const [startTime, setStartTime] = useState(null);
+  const [startTimeError, setStartTimeError] = useState("");
+
+  const [estimatedTime, setEstimatedTime] = useState("");
+  const [estimatedTimeError, setEstimatedTimeError] = useState("");
+
 
   const [attemptingSubmit, setAttemptingSubmit] = useState(false);
   const [successfulSubmission, setSuccessfulSubmission] = useState(false);
 
   const handleSubmit = async () => {
     setAttemptingSubmit(true);
+    setDoctorsError(doctors.length > 0 ? '' : 'Doctors Ids are required');
     setPatientError(patient ? '' : 'Patient Id is required');
-    setIncubatorError(incubator ? '' : 'Incubator Id is required');
-    setStartDateError(startDate ? '' : 'Start date is required');
-    setEndDateError(endDate ? '' : 'End date is required');
+    setRoomError(room ? '' : 'Room Id is required');
+    setSurgeryTypeError(surgeryType ? '' : 'Surgery type Id is required');
+    setStartTimeError(startTime ? '' : 'Start time is required');
+    setEstimatedTimeError(estimatedTime ? '' : 'Estimated time is required');
 
-    if (dayjs(startDate) > dayjs(endDate)) {
-      setEndDateError('End date cannot be before start date');
-    } else if (patient && incubator && startDate && endDate) {
+
+    if (patient && room && surgeryType && doctors.length > 0 && startTime && estimatedTime) {
       const newService = {
         patient,
-        incubator,
-        start_date: startDate,
-        end_date: endDate
+        room,
+        surgery_type: surgeryType,
+        doctors,
+        start_time: startTime,
+        estimated_time: estimatedTime,
       };
 
       const res = await stores.doctorServicesStore.createNewDoctorService(
-        newService, "incubator",
+        newService, "surgery",
       );
 
       if (res) {
@@ -87,7 +102,7 @@ const NurseryBooking = () => {
           marginLeft: spacing(15),
         }}>
 
-          <Typography variant="h4">Nursery</Typography>
+          <Typography variant="h4">Surgical Operation</Typography>
           {successfulSubmission ? (<SubmitSuccess />) : (
             <>
               <FormControl style={{
@@ -124,23 +139,23 @@ const NurseryBooking = () => {
                 gap: spacing(2),
               }}>
                 <FormLabel style={{ width: spacing(16) }}>
-                  Incubator:
+                  Room:
                 </FormLabel>
                 <Select
-                  value={incubator}
+                  value={room}
                   displayEmpty
                   defaultValue='none'
-                  onChange={(evt) => setIncubator(evt.target.value)}
-                  error={!!incubatorError}
+                  onChange={(evt) => setRoom(evt.target.value)}
+                  error={!!roomError}
                   style={{ width: spacing(45) }}
                 >
-                  <MenuItem value='none' disabled>Incubator</MenuItem>
-                  {Object.entries(incubators).map(([name, id]) => (
+                  <MenuItem value='none' disabled>Room</MenuItem>
+                  {Object.entries(surgeryRooms).map(([name, id]) => (
                     <MenuItem key={id} value={id}>{name}</MenuItem>
                   ))}
                 </Select>
                 <FormHelperText error>
-                  {incubatorError}
+                  {roomError}
                 </FormHelperText>
               </FormControl>
 
@@ -151,27 +166,24 @@ const NurseryBooking = () => {
                 gap: spacing(2),
               }}>
                 <FormLabel style={{ width: spacing(16) }}>
-                  Start Date:
+                  Surgery Type:
                 </FormLabel>
-                <DatePicker
-                  value={startDate}
-                  onChange={(evt) => setStartDate(dayjs(evt).format("YYYY-MM-DD"))}
-                  inputFormat="DD/MM/YYYY"
-                  disablePast
-                  maxDate={dayjs(getDateDaysAhead(30))}
-                  minDate={dayjs(getDateDaysAhead(0))}
-                  openTo="day"
-                  renderInput={params => (
-                    <TextField
-                      {...params}
-                      style={{ width: spacing(45) }}
-                      variant="outlined"
-                      inputProps={{ ...params.inputProps, placeholder: 'DD/MM/YYYY' }}
-                      error={!!startDateError}
-                    />
-                  )}
-                />
-                <FormHelperText error>{startDateError}</FormHelperText>
+                <Select
+                  value={surgeryType}
+                  displayEmpty
+                  defaultValue='none'
+                  onChange={(evt) => setSurgeryType(evt.target.value)}
+                  error={!!surgeryTypeError}
+                  style={{ width: spacing(45) }}
+                >
+                  <MenuItem value='none' disabled>Surgery</MenuItem>
+                  {Object.entries(surgeryTypes).map(([name, id]) => (
+                    <MenuItem key={id} value={id}>{name}</MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText error>
+                  {surgeryTypeError}
+                </FormHelperText>
               </FormControl>
 
               <FormControl style={{
@@ -180,16 +192,44 @@ const NurseryBooking = () => {
                 justifyContent: "space-between",
                 gap: spacing(2),
               }}>
-                <FormLabel style={{ width: spacing(16) }}>
-                  End Date:
+                <FormLabel style={{ width: spacing(24) }}>
+                  Performing Doctors:
                 </FormLabel>
-                <DatePicker
-                  value={endDate}
-                  onChange={(evt) => setEndDate(dayjs(evt).format("YYYY-MM-DD"))}
-                  inputFormat="DD/MM/YYYY"
+                <Select
+                  value={doctors}
+                  multiple
+                  displayEmpty
+                  defaultValue='none'
+                  onChange={(evt) => setDoctors(evt.target.value)}
+                  error={!!doctorsError}
+                  style={{ width: spacing(45) }}
+                >
+                  <MenuItem value='none' disabled>Doctor</MenuItem>
+                  {stores.doctorsStore.doctorsList.map((doctor) => (
+                    <MenuItem key={doctor.id} value={doctor.id}>{doctor.first_name} {doctor.last_name}</MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText error>
+                  {doctorsError}
+                </FormHelperText>
+              </FormControl>
+
+
+              <FormControl style={{
+                width: spacing(60),
+                display: 'flex',
+                justifyContent: "space-between",
+                gap: spacing(2),
+              }}>
+                <FormLabel style={{ width: spacing(16) }}>
+                  Start time:
+                </FormLabel>
+                <DateTimePicker
+                  value={startTime}
+                  onChange={(evt) => setStartTime(dayjs(evt).format("YYYY-MM-DDTHH:mm:ssZ"))}
+                  inputFormat="hh:mm a - DD/MM/YYYY"
                   disablePast
-                  maxDate={dayjs(getDateDaysAhead(90))}
-                  minDate={dayjs(getDateDaysAhead(2))}
+                  maxDate={dayjs(getDateDaysAhead(10))}
                   openTo="day"
                   renderInput={params => (
                     <TextField
@@ -197,11 +237,33 @@ const NurseryBooking = () => {
                       style={{ width: spacing(45) }}
                       variant="outlined"
                       inputProps={{ ...params.inputProps, placeholder: 'DD/MM/YYYY' }}
-                      error={!!endDateError}
+                      error={!!startTimeError}
                     />
                   )}
                 />
-                <FormHelperText error>{endDateError}</FormHelperText>
+                <FormHelperText error>{startTimeError}</FormHelperText>
+              </FormControl>
+
+              <FormControl style={{
+                width: spacing(60),
+                display: 'flex',
+                justifyContent: "space-between",
+                gap: spacing(2),
+              }}>
+                <FormLabel style={{ width: spacing(32) }}>
+                  Estimated time (in minutes):
+                </FormLabel>
+                <TextField
+                  value={estimatedTime}
+                  type="number"
+                  onChange={(evt) => setEstimatedTime(evt.currentTarget.value)}
+                  variant="outlined"
+                  error={!!estimatedTimeError}
+                  style={{ width: spacing(45) }}
+                />
+                <FormHelperText error>
+                  {estimatedTimeError}
+                </FormHelperText>
               </FormControl>
 
               <Button
@@ -225,12 +287,12 @@ const NurseryBooking = () => {
 
       <img
         alt='doctor writing prescription'
-        src={require('../assets/img/doctor-services/nursery-hero.png')}
-        width={spacing(60)} height={spacing(60)}
+        src={require('../assets/img/doctor-services/surgery-hero.png')}
+        width={spacing(70)} height={spacing(55)}
       />
 
     </section >
   );
 };
 
-export default observer(NurseryBooking);
+export default observer(SurgeryBooking);

@@ -21,6 +21,7 @@ import {
   BloodBankBooking,
   NurseryBooking,
   CareRoomBooking,
+  SurgeryBooking,
 } from './screens';
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -61,11 +62,11 @@ const routes = [
     element: <CareRoomBooking />,
     exact: true,
   },
-  // {
-  //   path: '/doctor/services/surgery',
-  //   element: <SurgeryBook />,
-  //   exact: true,
-  // },
+  {
+    path: '/doctor/services/surgery',
+    element: <SurgeryBooking />,
+    exact: true,
+  },
   {
     path: '/patient/services',
     element: <PatientServicesLanding />,
