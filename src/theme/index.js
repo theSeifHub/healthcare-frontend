@@ -15,7 +15,10 @@ const theme = createTheme({
     },
     background: {
       default: '#C7E3EF',
-    }
+    },
+    golden: {
+      main: '#FFCC00'
+    },
   },
   typography: {
     fontFamily: "Inter",

@@ -1,6 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { AppBar, Button, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import theme from "../theme";
 import stores from "../stores";
@@ -67,22 +68,28 @@ const NavBar = () => {
 			</nav>
 			<div style={{ width: spacing(30), display: "flex", alignItems: "center", gap: spacing(2) }}>
 				{authStore.user ? (
-					<Button
-						variant="contained"
-						size="large"
-						onClick={() => {
-							authStore.logout();
-							navigate("/sign-in");
-						}}
-						color="primary"
-						style={{
-							width: spacing(15),
-							background: primary.main,
-							padding: `${spacing(0.5)} ${spacing(1)}`
-						}}
-					>
-						Sign Out
-					</Button>
+					<>
+						<RouterLink to={"/profile"} style={{ textDecoration: "none", color: "black" }}>
+							<AccountCircleIcon fontSize="large" />
+						</RouterLink>
+
+						<Button
+							variant="contained"
+							size="large"
+							onClick={() => {
+								authStore.logout();
+								navigate("/sign-in");
+							}}
+							color="primary"
+							style={{
+								width: spacing(12),
+								background: primary.main,
+								padding: `${spacing(0.5)} ${spacing(1)}`
+							}}
+						>
+							Sign Out
+						</Button>
+					</>
 				) : (
 					<>
 						<RouterLink to={"/sign-up"} style={{ textDecoration: "none" }}>

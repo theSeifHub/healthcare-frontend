@@ -22,6 +22,7 @@ import {
   NurseryBooking,
   CareRoomBooking,
   SurgeryBooking,
+  Profile,
 } from './screens';
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -115,6 +116,11 @@ const routes = [
   {
     path: '/contact-us',
     element: <ContactUs />,
+    exact: true,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
     exact: true,
   },
 ];

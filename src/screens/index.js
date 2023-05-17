@@ -16,6 +16,7 @@ import BloodBankBooking from './BloodBankBooking';
 import NurseryBooking from './NurseryBooking';
 import CareRoomBooking from './CareRoomBooking';
 import SurgeryBooking from './SurgeryBooking';
+import Profile from './Profile';
 
 export {
   SignIn,
@@ -36,4 +37,5 @@ export {
   NurseryBooking,
   CareRoomBooking,
   SurgeryBooking,
+  Profile,
 };
