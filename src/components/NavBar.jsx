@@ -69,9 +69,11 @@ const NavBar = () => {
 			<div style={{ width: spacing(30), display: "flex", alignItems: "center", gap: spacing(2) }}>
 				{authStore.user ? (
 					<>
-						<RouterLink to={"/profile"} style={{ textDecoration: "none", color: "black" }}>
-							<AccountCircleIcon fontSize="large" />
-						</RouterLink>
+						{authStore.user.doctor && (
+							<RouterLink to={"/profile"} style={{ textDecoration: "none", color: "black" }}>
+								<AccountCircleIcon fontSize="large" />
+							</RouterLink>
+						)}
 
 						<Button
 							variant="contained"

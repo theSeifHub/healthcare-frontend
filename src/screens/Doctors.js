@@ -27,8 +27,8 @@ const Doctors = () => {
     return <Spinner size="large" />
   }
 
-  const findSpec = async (drSpecialityId) => {
-    const speciality = await stores.doctorsStore.specialitiesList.find(
+  const findSpec = (drSpecialityId) => {
+    const speciality = stores.doctorsStore.specialitiesList.find(
       (sp) => sp.id === drSpecialityId
     );
     return speciality;

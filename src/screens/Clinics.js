@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Paper,
@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import theme from "../theme";
 import stores from "../stores";
+import { observer } from "mobx-react-lite";
 
 const Clinics = () => {
   const {
@@ -15,11 +16,8 @@ const Clinics = () => {
     }
   } = theme;
 
-  const [specialities, setSpecialities] = useState([]);
   useEffect(() => {
-    stores.doctorsStore
-      .getSpecialitiesList()
-      .then(res => setSpecialities(res))
+    stores.doctorsStore.getSpecialitiesList();
   }, []);
 
   return (
@@ -44,7 +42,7 @@ const Clinics = () => {
         flexWrap: "wrap",
         justifyContent: "center",
       }}>
-        {specialities.map((sp) => (
+        {stores.doctorsStore.specialitiesList.map((sp) => (
           <Link
             key={sp.id}
             style={{ textDecoration: "none", width: "45%" }}
@@ -76,4 +74,4 @@ const Clinics = () => {
   );
 };
 
-export default Clinics;
+export default observer(Clinics);
