@@ -70,7 +70,7 @@ const NavBar = () => {
 				{authStore.user ? (
 					<>
 						{authStore.user.doctor && (
-							<RouterLink to={"/profile"} style={{ textDecoration: "none", color: "black" }}>
+							<RouterLink to={"/me"} style={{ textDecoration: "none", color: "black" }}>
 								<AccountCircleIcon fontSize="large" />
 							</RouterLink>
 						)}

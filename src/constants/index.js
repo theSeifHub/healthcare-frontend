@@ -171,3 +171,30 @@ export const surgeryTypes = {
   "Lung Surgery": 4,
   "Other": 5,
 }
+
+export const doctorProfileTabs = [
+  {
+    label: "Schedule",
+    value: "schedule",
+  },
+  {
+    label: "Surgeries",
+    value: "surgeries",
+  },
+  {
+    label: "Blood Bank",
+    value: "bloodbank",
+  },
+  {
+    label: "Nursery",
+    value: "nursery",
+  },
+  {
+    label: "Care Room",
+    value: "care-room",
+  },
+  {
+    label: "Patient Services",
+    value: "patient-services",
+  },
+];
