@@ -13,6 +13,24 @@ import ScheduleTab from "./Schedule"
 // import CareRoomTab from "./CareRoom"
 // import PatientServicesTab from "./PatientServices"
 
+const renderCurrentTab = (tabId) => {
+  switch (tabId) {
+    case "schedule":
+      return <ScheduleTab />
+    // case "surgeries":
+    //   return <SurgeriesTab />
+    // case "bloodbank":
+    //   return <BloodBankTab />
+    // case "nursery":
+    //   return <NurseryTab />
+    // case "care-room":
+    //   return <CareRoomTab />
+    // case "patient-services":
+    //   return <PatientServicesTab />
+    default:
+      return <ScheduleTab />
+  }
+}
 const DoctorProfile = ({ goToTab }) => {
   const {
     spacing,
@@ -50,7 +68,7 @@ const DoctorProfile = ({ goToTab }) => {
   // const darkStars = 5 - goldenStars;
 
   return (
-    <main style={{ display: 'flex', minHeight: "83vh" }}>
+    <main style={{ display: 'flex' }}>
       <Paper
         style={{
           background: background.default,
@@ -107,13 +125,8 @@ const DoctorProfile = ({ goToTab }) => {
             )
           })}
         </Tabs>
-        <div style={{ marginTop: spacing(2), height: "100%", width: "100%" }}>
-          <ScheduleTab currentTab={currentTab} />
-          {/* <SurgeriesTab currentTab={currentTab} />
-          <BloodBankTab currentTab={currentTab} />
-          <NurseryTab currentTab={currentTab} />
-          <CareRoomTab currentTab={currentTab} />
-          <PatientServicesTab currentTab={currentTab} /> */}
+        <div style={{ padding: spacing(2), height: "95%", width: "95%" }}>
+          {renderCurrentTab(currentTab)}
         </div>
       </div>
     </main>

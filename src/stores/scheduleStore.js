@@ -25,12 +25,17 @@ export default class ScheduleStore {
 
   async getDoctorSchedule(drId) {
     try {
-      const { data: scheduleRes } = await axiosInstance.get(showDoctorSchedule(drId), {
+      const { status, data: scheduleRes } = await axiosInstance.get(showDoctorSchedule(drId), {
         headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
       });
 
-      this.setCurrentDrSchedule(scheduleRes)
+      if (status === 200) {
+        this.setCurrentDrSchedule(scheduleRes);
+      }
     } catch (error) {
+      if (error.response.status === 404) {
+        this.setCurrentDrSchedule(null);
+      }
       console.error(error.response);
       throw error.response;
     }

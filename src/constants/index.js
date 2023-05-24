@@ -172,6 +172,17 @@ export const surgeryTypes = {
   "Other": 5,
 }
 
+export const weekDays = {
+  sat: "Saturday",
+  sun: "Sunday",
+  mon: "Monday",
+  tue: "Tuesday",
+  wed: "Wednesday",
+  thu: "Thursday",
+  fri: "Friday",
+};
+
+
 export const doctorProfileTabs = [
   {
     label: "Schedule",
