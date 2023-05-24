@@ -19,3 +19,7 @@ export const createSurgeryRoomService = "/surgery/create/";
 export const createPatient = "/patient/create/";
 export const getPatientsList = "/patient/index/";
 export const createPatientService = "/service/create/";
+
+// schedule
+export const showDoctorSchedule = (id) => `/schedule/show/${id}/`;
+export const getReservedDoctorSchedule = "/schedule/list_reserved/";
