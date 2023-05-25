@@ -5,11 +5,14 @@ import {
   createIncubatorService,
   createICUService,
   createSurgeryRoomService,
+  getSurgeriesList,
 } from "../axios/endpoints";
 import stores from '.';
 
 
 export default class DoctorServicesStore {
+  upcomingSurgeries = [];
+  pastSurgeries = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -42,6 +45,31 @@ export default class DoctorServicesStore {
         });
 
       return Promise.resolve(serviceRes);
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
+
+  setUpcomingSurgeries(list) {
+    this.upcomingSurgeries = list
+  };
+
+  setPastSurgeries(list) {
+    this.pastSurgeries = list
+  };
+
+  async getSurgeries(type) {
+    try {
+      const { data: surgeriesRes } = await axiosInstance.get(getSurgeriesList(type), {
+        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` },
+      });
+
+      if (type === "past") {
+        this.setPastSurgeries(surgeriesRes);
+      } else {
+        this.setUpcomingSurgeries(surgeriesRes);
+      }
     } catch (error) {
       console.error(error.response);
       throw error.response;

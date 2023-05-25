@@ -150,7 +150,7 @@ const SurgeryBooking = () => {
                   style={{ width: spacing(45) }}
                 >
                   <MenuItem value='none' disabled>Room</MenuItem>
-                  {Object.entries(surgeryRooms).map(([name, id]) => (
+                  {Object.entries(surgeryRooms).map(([id, name]) => (
                     <MenuItem key={id} value={id}>{name}</MenuItem>
                   ))}
                 </Select>
@@ -177,7 +177,7 @@ const SurgeryBooking = () => {
                   style={{ width: spacing(45) }}
                 >
                   <MenuItem value='none' disabled>Surgery</MenuItem>
-                  {Object.entries(surgeryTypes).map(([name, id]) => (
+                  {Object.entries(surgeryTypes).map(([id, name]) => (
                     <MenuItem key={id} value={id}>{name}</MenuItem>
                   ))}
                 </Select>

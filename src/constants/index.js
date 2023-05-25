@@ -159,17 +159,17 @@ export const icuBeds = {
 }
 
 export const surgeryRooms = {
-  "Operation Room 1": "OR_1",
-  "Operation Room 2": "OR_2",
-  "Operation Room 3": "OR_3",
+  "OR_1": "Operation Room 1",
+  "OR_2": "Operation Room 2",
+  "OR_3": "Operation Room 3",
 }
 
 export const surgeryTypes = {
-  "Heart Surgery": 1,
-  "Brain Surgery": 2,
-  "Cancer Surgery": 3,
-  "Lung Surgery": 4,
-  "Other": 5,
+  "1": "Heart Surgery",
+  "2": "Brain Surgery",
+  "3": "Cancer Surgery",
+  "4": "Lung Surgery",
+  "5": "Other",
 }
 
 export const weekDays = {
