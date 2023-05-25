@@ -7,6 +7,7 @@ import theme from "../../theme";
 import Spinner from "../../components/Spinner";
 import GenericTable from "../../components/GenericTable"
 import { weekDays } from "../../constants";
+import { CreateScheduleForm } from "./CreateScheduleForm";
 
 const createRowData = (
   id, patientName, patientPhone, patientAge, day, from, to,
@@ -16,15 +17,18 @@ const Schedule = () => {
   const [loadingData, setLoadingData] = useState(true);
 
   useEffect(() => {
-    // TODO Update with actual dr ID
     stores.scheduleStore
+      // TODO Update with actual dr ID
       .getDoctorSchedule(1)
-      .then(r => setLoadingData(false));
-    // stores.scheduleStore.getReservedAppointments(),
+      .finally(() => setLoadingData(false));
   }, []);
 
   if (loadingData) {
     return <Spinner size="large" />
+  }
+
+  if (!stores.scheduleStore.currentDrScheduleDetails) {
+    return <CreateScheduleForm />
   }
 
   const { currentDrScheduleDetails: {
@@ -44,7 +48,7 @@ const Schedule = () => {
     { title: "To", id: "to" },
   ];
 
-  const rows = (() => {
+  const appointmentRows = (() => {
     const reservedAppointments = [];
     appointments.forEach(app => {
       if (app.patient) {
@@ -100,15 +104,15 @@ const Schedule = () => {
         <p>
           <strong>Time: </strong>
           <span>
-            {dayjs(start_time, 'HH:mm:ss').format("hh:mm a")}
-            -
-            {dayjs(end_time, 'HH:mm:ss').format("hh:mm a")}
+            {`${dayjs(start_time, 'HH:mm:ss').format("hh:mm a")}
+             - ${dayjs(end_time, 'HH:mm:ss').format("hh:mm a")}`}
           </span>
         </p>
         <p>
           <strong>Upcoming Appointments: </strong>
+          {!appointmentRows.length > 0 && "None"}
         </p>
-        <GenericTable headers={headers} rows={rows} />
+        {appointmentRows.length > 0 && <GenericTable headers={headers} rows={appointmentRows} />}
       </Box>
     </>
   );

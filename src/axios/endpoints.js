@@ -23,3 +23,4 @@ export const createPatientService = "/service/create/";
 // schedule
 export const showDoctorSchedule = (id) => `/schedule/show/${id}/`;
 export const getReservedDoctorSchedule = "/schedule/list_reserved/";
+export const createDoctorSchedule = "/schedule/create/";

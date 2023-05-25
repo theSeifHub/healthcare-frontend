@@ -3,6 +3,7 @@ import axiosInstance from '../axios/instance';
 import {
   showDoctorSchedule,
   getReservedDoctorSchedule,
+  createDoctorSchedule,
 } from "../axios/endpoints";
 import stores from '.';
 
@@ -21,6 +22,20 @@ export default class ScheduleStore {
 
   setReservedAppointments(appointments) {
     this.reservedAppointments = appointments;
+  }
+
+  async createDoctorSchedule(newSchedule) {
+    try {
+      const { data: scheduleRes } = await axiosInstance.post(
+        createDoctorSchedule,
+        newSchedule,
+        { headers: { Authorization: `Bearer ${stores.authStore.accessToken}` } },
+      );
+      return Promise.resolve(scheduleRes);
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
   }
 
   async getDoctorSchedule(drId) {
