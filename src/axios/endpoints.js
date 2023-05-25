@@ -14,11 +14,8 @@ export const createBloodBankService = "/bloodbank/create/";
 export const createIncubatorService = "/incubator/create/";
 export const createICUService = "/icu/create/";
 export const createSurgeryRoomService = "/surgery/create/";
-
 const surgeriesListSlugs = { upcoming: "index_upcoming", past: "index_past" }
-export const getSurgeriesList = (type) => {
-  return `/surgery/${surgeriesListSlugs[type]}/`;
-};
+export const getSurgeriesList = (type) => `/surgery/${surgeriesListSlugs[type]}/`;
 
 // patients
 export const createPatient = "/patient/create/";

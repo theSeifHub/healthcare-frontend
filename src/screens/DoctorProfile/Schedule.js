@@ -59,7 +59,7 @@ const Schedule = () => {
         const day = dayjs(start_time).format("dddd, MMM D, YYYY");
         const from = dayjs(start_time).format("hh:mm a");
         const to = dayjs(end_time).format("hh:mm a");
-        reservedAppointments.push(createRowData(id, patientName, patient.phone_number, age(), day, from, to));
+        reservedAppointments.push(createRowData(id, patientName, patient.phone_number, age, day, from, to));
       }
     });
     return reservedAppointments;
