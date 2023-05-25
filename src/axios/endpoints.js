@@ -11,6 +11,8 @@ export const getSpecialitiesList = "/doctor/list/";
 
 // doctor services
 export const createBloodBankService = "/bloodbank/create/";
+export const getTotalBloodBags = (type) => `/bloodbank/total_amount/${type}/`;
+export const createBloodBagsRequest = "/bloodbank/create_bloodbank_request/";
 export const createIncubatorService = "/incubator/create/";
 export const createICUService = "/icu/create/";
 export const createSurgeryRoomService = "/surgery/create/";

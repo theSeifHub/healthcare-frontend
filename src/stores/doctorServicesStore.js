@@ -6,6 +6,8 @@ import {
   createICUService,
   createSurgeryRoomService,
   getSurgeriesList,
+  getTotalBloodBags,
+  createBloodBagsRequest,
 } from "../axios/endpoints";
 import stores from '.';
 
@@ -70,6 +72,34 @@ export default class DoctorServicesStore {
       } else {
         this.setUpcomingSurgeries(surgeriesRes);
       }
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
+
+  async getBloodTypeAmount(type) {
+    try {
+      const { data: bagsRes } = await axiosInstance.get(getTotalBloodBags(type), {
+        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` },
+      });
+
+      return Promise.resolve(bagsRes);
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
+
+  async createBloodBankBagRequest(bagsRequest) {
+    try {
+      const { data: requestRes } = await axiosInstance.post(
+        createBloodBagsRequest,
+        bagsRequest,
+        { headers: { Authorization: `Bearer ${stores.authStore.accessToken}` } },
+      );
+
+      return Promise.resolve(requestRes);
     } catch (error) {
       console.error(error.response);
       throw error.response;

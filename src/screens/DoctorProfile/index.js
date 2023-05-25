@@ -8,7 +8,7 @@ import Spinner from "../../components/Spinner";
 import { doctorProfileTabs } from "../../constants";
 import ScheduleTab from "./Schedule"
 import SurgeriesTab from "./Surgeries"
-// import BloodBankTab from "./BloodBank"
+import BloodBankTab from "./BloodBank"
 // import NurseryTab from "./Nursery"
 // import CareRoomTab from "./CareRoom"
 // import PatientServicesTab from "./PatientServices"
@@ -19,8 +19,8 @@ const renderCurrentTab = (tabId) => {
       return <ScheduleTab />
     case "surgeries":
       return <SurgeriesTab />
-    // case "bloodbank":
-    //   return <BloodBankTab />
+    case "bloodbank":
+      return <BloodBankTab />
     // case "nursery":
     //   return <NurseryTab />
     // case "care-room":
