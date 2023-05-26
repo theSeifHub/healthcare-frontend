@@ -10,7 +10,7 @@ import ScheduleTab from "./Schedule"
 import SurgeriesTab from "./Surgeries"
 import BloodBankTab from "./BloodBank"
 import NurseryTab from "./Nursery"
-// import CareRoomTab from "./CareRoom"
+import CareRoomTab from "./CareRoom"
 // import PatientServicesTab from "./PatientServices"
 
 const renderCurrentTab = (tabId) => {
@@ -23,8 +23,8 @@ const renderCurrentTab = (tabId) => {
       return <BloodBankTab />
     case "nursery":
       return <NurseryTab />
-    // case "care-room":
-    //   return <CareRoomTab />
+    case "care-room":
+      return <CareRoomTab />
     // case "patient-services":
     //   return <PatientServicesTab />
     default:

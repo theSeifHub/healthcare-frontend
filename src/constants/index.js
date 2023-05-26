@@ -151,17 +151,17 @@ export const incubators = {
 }
 
 export const icuBeds = {
-  "Bed 1": "bed_1",
-  "Bed 2": "bed_2",
-  "Bed 3": "bed_3",
-  "Bed 4": "bed_4",
-  "Bed 5": "bed_5",
+  bed_1: "Bed 1",
+  bed_2: "Bed 2",
+  bed_3: "Bed 3",
+  bed_4: "Bed 4",
+  bed_5: "Bed 5",
 }
 
 export const surgeryRooms = {
-  "OR_1": "Operation Room 1",
-  "OR_2": "Operation Room 2",
-  "OR_3": "Operation Room 3",
+  OR_1: "Operation Room 1",
+  OR_2: "Operation Room 2",
+  OR_3: "Operation Room 3",
 }
 
 export const surgeryTypes = {

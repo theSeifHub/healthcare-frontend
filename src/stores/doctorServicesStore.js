@@ -9,6 +9,7 @@ import {
   getTotalBloodBags,
   createBloodBagsRequest,
   getReservedIncubators,
+  getReservedICUBeds,
 } from "../axios/endpoints";
 import stores from '.';
 
@@ -17,6 +18,7 @@ export default class DoctorServicesStore {
   upcomingSurgeries = [];
   pastSurgeries = [];
   reservedIncubators = [];
+  reservedICUBeds = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -112,7 +114,7 @@ export default class DoctorServicesStore {
     this.reservedIncubators = list
   };
 
-  async getReservedIncubators(type) {
+  async getReservedIncubators() {
     try {
       const { data: incubatorsRes } = await axiosInstance.get(
         getReservedIncubators,
@@ -120,6 +122,24 @@ export default class DoctorServicesStore {
       );
 
       this.setReservedIncubators(incubatorsRes);
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
+
+  setReservedICUBeds(list) {
+    this.reservedICUBeds = list
+  };
+
+  async getReservedICUBeds() {
+    try {
+      const { data: icuRes } = await axiosInstance.get(
+        getReservedICUBeds,
+        { headers: { Authorization: `Bearer ${stores.authStore.accessToken}` } },
+      );
+
+      this.setReservedICUBeds(icuRes);
     } catch (error) {
       console.error(error.response);
       throw error.response;

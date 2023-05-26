@@ -16,6 +16,7 @@ export const createBloodBagsRequest = "/bloodbank/create_bloodbank_request/";
 export const createIncubatorService = "/incubator/create/";
 export const getReservedIncubators = "/incubator/reserved_incubators/";
 export const createICUService = "/icu/create/";
+export const getReservedICUBeds = "/icu/reserved_icu_beds/";
 export const createSurgeryRoomService = "/surgery/create/";
 const surgeriesListSlugs = { upcoming: "index_upcoming", past: "index_past" }
 export const getSurgeriesList = (type) => `/surgery/${surgeriesListSlugs[type]}/`;

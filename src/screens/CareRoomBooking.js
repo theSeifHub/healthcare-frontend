@@ -133,7 +133,7 @@ const CareRoomBooking = () => {
                   style={{ width: spacing(45) }}
                 >
                   <MenuItem value='none' disabled>Bed</MenuItem>
-                  {Object.entries(icuBeds).map(([name, id]) => (
+                  {Object.entries(icuBeds).map(([id, name]) => (
                     <MenuItem key={id} value={id}>{name}</MenuItem>
                   ))}
                 </Select>
