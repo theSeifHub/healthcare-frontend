@@ -19,11 +19,11 @@ const Schedule = () => {
 
   useEffect(() => {
     stores.scheduleStore
+      // .getDoctorSchedule(stores.authStore.user.doctor.id)
       // TODO Update with actual dr ID
       .getDoctorSchedule(1)
       .finally(() => setLoadingData(false));
   }, []);
-
   if (loadingData) {
     return <Spinner size="large" />
   }
@@ -49,7 +49,7 @@ const Schedule = () => {
     { title: "To", id: "to" },
   ];
 
-  const appointmentRows = () => {
+  const appointmentRows = (() => {
     const reservedAppointments = [];
     appointments.forEach(app => {
       if (app.patient) {
@@ -63,7 +63,7 @@ const Schedule = () => {
       }
     });
     return reservedAppointments;
-  };
+  })();
 
   const {
     spacing,
@@ -101,7 +101,7 @@ const Schedule = () => {
           {!appointmentRows.length > 0 && "None"}
         </p>
         {appointmentRows.length > 0 && (
-          <GenericTable headers={headers} rows={appointmentRows()} />
+          <GenericTable headers={headers} rows={appointmentRows} />
         )}
       </Box>
     </>
