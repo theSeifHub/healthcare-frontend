@@ -143,11 +143,11 @@ export const bloodTypes = [
 ];
 
 export const incubators = {
-  "Incubator 2": "nicu_2",
-  "Incubator 1": "nicu_1",
-  "Incubator 3": "nicu_3",
-  "Incubator 4": "nicu_4",
-  "Incubator 5": "nicu_5",
+  nicu_1: "Incubator 1",
+  nicu_2: "Incubator 2",
+  nicu_3: "Incubator 3",
+  nicu_4: "Incubator 4",
+  nicu_5: "Incubator 5",
 }
 
 export const icuBeds = {

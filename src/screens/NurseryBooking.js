@@ -135,7 +135,7 @@ const NurseryBooking = () => {
                   style={{ width: spacing(45) }}
                 >
                   <MenuItem value='none' disabled>Incubator</MenuItem>
-                  {Object.entries(incubators).map(([name, id]) => (
+                  {Object.entries(incubators).map(([id, name]) => (
                     <MenuItem key={id} value={id}>{name}</MenuItem>
                   ))}
                 </Select>

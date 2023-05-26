@@ -9,7 +9,7 @@ import { doctorProfileTabs } from "../../constants";
 import ScheduleTab from "./Schedule"
 import SurgeriesTab from "./Surgeries"
 import BloodBankTab from "./BloodBank"
-// import NurseryTab from "./Nursery"
+import NurseryTab from "./Nursery"
 // import CareRoomTab from "./CareRoom"
 // import PatientServicesTab from "./PatientServices"
 
@@ -21,8 +21,8 @@ const renderCurrentTab = (tabId) => {
       return <SurgeriesTab />
     case "bloodbank":
       return <BloodBankTab />
-    // case "nursery":
-    //   return <NurseryTab />
+    case "nursery":
+      return <NurseryTab />
     // case "care-room":
     //   return <CareRoomTab />
     // case "patient-services":
@@ -42,9 +42,7 @@ const DoctorProfile = ({ goToTab }) => {
   const [loadingData, setLoadingData] = useState(true);
   const [currentTab, setCurrentTab] = useState(goToTab || "schedule");
 
-  const handleTabChange = (event, newValue) => {
-    setCurrentTab(newValue);
-  };
+  const handleTabChange = (e, newTab) => setCurrentTab(newTab);
 
 
   useEffect(() => {

@@ -49,7 +49,7 @@ const Schedule = () => {
     { title: "To", id: "to" },
   ];
 
-  const appointmentRows = (() => {
+  const appointmentRows = () => {
     const reservedAppointments = [];
     appointments.forEach(app => {
       if (app.patient) {
@@ -63,7 +63,7 @@ const Schedule = () => {
       }
     });
     return reservedAppointments;
-  })();
+  };
 
   const {
     spacing,
@@ -100,7 +100,9 @@ const Schedule = () => {
           <strong>Upcoming Appointments: </strong>
           {!appointmentRows.length > 0 && "None"}
         </p>
-        {appointmentRows.length > 0 && <GenericTable headers={headers} rows={appointmentRows} />}
+        {appointmentRows.length > 0 && (
+          <GenericTable headers={headers} rows={appointmentRows()} />
+        )}
       </Box>
     </>
   );
