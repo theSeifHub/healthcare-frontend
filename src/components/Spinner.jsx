@@ -18,6 +18,8 @@ const Spinner = ({ size, color = "#383636" }) => {
 				return "50px";
 			case "small":
 				return "30px";
+			case "xsmall":
+				return "20px";
 			case "medium":
 			default:
 				return "40px";

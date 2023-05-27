@@ -1,11 +1,17 @@
 import { makeAutoObservable } from 'mobx';
 import axiosInstance from '../axios/instance';
-import { createPatient, createPatientService, getPatientsList } from "../axios/endpoints";
+import {
+  createPatient,
+  createPatientService,
+  getPatientsList,
+  getPatientServicesList,
+} from "../axios/endpoints";
 import stores from '.';
 
 
 export default class PatientsStore {
   patientsList = [];
+  patientsServicesList = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -50,4 +56,17 @@ export default class PatientsStore {
     }
   }
 
+  setPatientsServicesList(list) {
+    this.patientsServicesList = list;
+  }
+
+  async getPatientServicesList() {
+    try {
+      const { data } = await axiosInstance.get(getPatientServicesList);
+      this.setPatientsServicesList(data);
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
 };

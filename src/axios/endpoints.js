@@ -25,6 +25,7 @@ export const getSurgeriesList = (type) => `/surgery/${surgeriesListSlugs[type]}/
 export const createPatient = "/patient/create/";
 export const getPatientsList = "/patient/index/";
 export const createPatientService = "/service/create/";
+export const getPatientServicesList = "/service/index/";
 
 // schedule
 export const showDoctorSchedule = (id) => `/schedule/show/${id}/`;
