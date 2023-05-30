@@ -44,11 +44,8 @@ export default class DoctorServicesStore {
       const endpoint = this.getServiceEndpoint(serviceId);
 
       const { data: serviceRes } = await axiosInstance.post(
-        endpoint,
-        newServiceData,
-        {
-          headers: { Authorization: `Bearer ${stores.authStore.accessToken}` },
-        });
+        endpoint, newServiceData,
+      );
 
       return Promise.resolve(serviceRes);
     } catch (error) {
@@ -67,9 +64,7 @@ export default class DoctorServicesStore {
 
   async getSurgeries(type) {
     try {
-      const { data: surgeriesRes } = await axiosInstance.get(getSurgeriesList(type), {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` },
-      });
+      const { data: surgeriesRes } = await axiosInstance.get(getSurgeriesList(type));
 
       if (type === "past") {
         this.setPastSurgeries(surgeriesRes);
@@ -84,9 +79,7 @@ export default class DoctorServicesStore {
 
   async getBloodTypeAmount(type) {
     try {
-      const { data: bagsRes } = await axiosInstance.get(getTotalBloodBags(type), {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` },
-      });
+      const { data: bagsRes } = await axiosInstance.get(getTotalBloodBags(type));
 
       return Promise.resolve(bagsRes);
     } catch (error) {
@@ -98,9 +91,7 @@ export default class DoctorServicesStore {
   async createBloodBankBagRequest(bagsRequest) {
     try {
       const { data: requestRes } = await axiosInstance.post(
-        createBloodBagsRequest,
-        bagsRequest,
-        { headers: { Authorization: `Bearer ${stores.authStore.accessToken}` } },
+        createBloodBagsRequest, bagsRequest,
       );
 
       return Promise.resolve(requestRes);
@@ -116,10 +107,7 @@ export default class DoctorServicesStore {
 
   async getReservedIncubators() {
     try {
-      const { data: incubatorsRes } = await axiosInstance.get(
-        getReservedIncubators,
-        { headers: { Authorization: `Bearer ${stores.authStore.accessToken}` } },
-      );
+      const { data: incubatorsRes } = await axiosInstance.get(getReservedIncubators);
 
       this.setReservedIncubators(incubatorsRes);
     } catch (error) {
@@ -134,10 +122,7 @@ export default class DoctorServicesStore {
 
   async getReservedICUBeds() {
     try {
-      const { data: icuRes } = await axiosInstance.get(
-        getReservedICUBeds,
-        { headers: { Authorization: `Bearer ${stores.authStore.accessToken}` } },
-      );
+      const { data: icuRes } = await axiosInstance.get(getReservedICUBeds);
 
       this.setReservedICUBeds(icuRes);
     } catch (error) {

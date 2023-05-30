@@ -46,7 +46,7 @@ export default class AuthStore {
       await this.getCurrentUser();
       return Promise.resolve();
     } catch (error) {
-      console.error(error.response);
+      console.error("Login error: ", error);
       throw error.response;
     }
   }
@@ -69,11 +69,7 @@ export default class AuthStore {
   }
 
   async getCurrentUser() {
-    const { data } = await axiosInstance.get(getCurrentUser, {
-      headers: {
-        Authorization: `Bearer ${this.accessToken}`
-      }
-    });
+    const { data } = await axiosInstance.get(getCurrentUser);
     localStorage.setItem('currentUser', JSON.stringify(data.user));
     this.user = data.user;
   }

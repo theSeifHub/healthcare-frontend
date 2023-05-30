@@ -19,10 +19,7 @@ export default class PatientsStore {
 
   async createNewPatient(newPatientData) {
     try {
-      const { data: patientRes } = await axiosInstance.post(
-        createPatient, newPatientData, {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
+      const { data: patientRes } = await axiosInstance.post(createPatient, newPatientData);
       return Promise.resolve(patientRes);
     } catch (error) {
       console.error(error.response);
@@ -33,9 +30,8 @@ export default class PatientsStore {
   async createNewPatientService(newServiceData) {
     try {
       const { data: serviceRes } = await axiosInstance.post(
-        createPatientService, newServiceData, {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
+        createPatientService, newServiceData
+      );
       return Promise.resolve(serviceRes);
     } catch (error) {
       console.error(error.response);
@@ -45,9 +41,7 @@ export default class PatientsStore {
 
   async getPatientsList() {
     try {
-      const { data } = await axiosInstance.get(getPatientsList, {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
+      const { data } = await axiosInstance.get(getPatientsList);
       this.patientsList = data;
 
     } catch (error) {

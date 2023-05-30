@@ -29,9 +29,7 @@ export default class ScheduleStore {
   async createDoctorSchedule(newSchedule) {
     try {
       const { data: scheduleRes } = await axiosInstance.post(
-        createDoctorSchedule,
-        newSchedule,
-        { headers: { Authorization: `Bearer ${stores.authStore.accessToken}` } },
+        createDoctorSchedule, newSchedule,
       );
       return Promise.resolve(scheduleRes);
     } catch (error) {
@@ -42,9 +40,7 @@ export default class ScheduleStore {
 
   async getDoctorSchedule(drId) {
     try {
-      const { status, data: scheduleRes } = await axiosInstance.get(showDoctorSchedule(drId), {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
+      const { status, data: scheduleRes } = await axiosInstance.get(showDoctorSchedule(drId));
 
       if (status === 200) {
         this.setCurrentDrSchedule(scheduleRes);
@@ -60,9 +56,7 @@ export default class ScheduleStore {
 
   async getReservedAppointments() {
     try {
-      const { data: appRes } = await axiosInstance.get(getReservedDoctorSchedule, {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
+      const { data: appRes } = await axiosInstance.get(getReservedDoctorSchedule);
 
       this.setReservedAppointments(appRes)
     } catch (error) {

@@ -20,9 +20,7 @@ export default class DoctorsStore {
 
   async createNewDoctor(newDrData) {
     try {
-      const { data: drRes } = await axiosInstance.post(createDoctor, newDrData, {
-        headers: { Authorization: `Bearer ${stores.authStore.accessToken}` }
-      });
+      const { data: drRes } = await axiosInstance.post(createDoctor, newDrData);
 
       return Promise.resolve(drRes);
     } catch (error) {
@@ -32,17 +30,12 @@ export default class DoctorsStore {
   }
 
   async getDoctorsList(specialityId) {
-    const headers = { Authorization: `Bearer ${stores.authStore.accessToken}` };
     try {
       if (specialityId) {
-        const { data } = await axiosInstance.get(filterDoctorsBySpeciality(specialityId), {
-          headers
-        });
+        const { data } = await axiosInstance.get(filterDoctorsBySpeciality(specialityId));
         this.doctorsList = data;
       } else {
-        const { data } = await axiosInstance.get(getDoctorsList, {
-          headers
-        });
+        const { data } = await axiosInstance.get(getDoctorsList);
         this.doctorsList = data;
       }
     } catch (error) {
