@@ -17,7 +17,7 @@ export default class AuthStore {
 
     if (currentUser && tokens.accessToken) {
       this.setTokens(tokens.accessToken, tokens.refreshToken);
-      this.user = currentUser;
+      this.setCurrentUser(currentUser);
     }
   }
 
@@ -32,6 +32,10 @@ export default class AuthStore {
       accessToken: access,
       refreshToken: refresh,
     }));
+  }
+
+  setCurrentUser(user) {
+    this.user = user;
   }
 
   async login(email, password) {
@@ -65,12 +69,12 @@ export default class AuthStore {
     this.setTokens();
     localStorage.removeItem('tokens');
     localStorage.removeItem('currentUser');
-    this.user = null;
+    this.setCurrentUser(null);
   }
 
   async getCurrentUser() {
     const { data } = await axiosInstance.get(getCurrentUser);
     localStorage.setItem('currentUser', JSON.stringify(data.user));
-    this.user = data.user;
+    this.setCurrentUser(data.user);
   }
 };

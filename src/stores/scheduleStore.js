@@ -7,8 +7,6 @@ import {
   getDrAvailableAppointments,
   createNewAppointment,
 } from "../axios/endpoints";
-import stores from '.';
-
 
 export default class ScheduleStore {
   currentDrScheduleDetails = null;

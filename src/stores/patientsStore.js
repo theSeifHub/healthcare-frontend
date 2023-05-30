@@ -6,8 +6,6 @@ import {
   getPatientsList,
   getPatientServicesList,
 } from "../axios/endpoints";
-import stores from '.';
-
 
 export default class PatientsStore {
   patientsList = [];
@@ -39,11 +37,14 @@ export default class PatientsStore {
     }
   }
 
+  setPatientsList(list) {
+    this.patientsList = list;
+  }
+
   async getPatientsList() {
     try {
       const { data } = await axiosInstance.get(getPatientsList);
-      this.patientsList = data;
-
+      this.setPatientsList(data);
     } catch (error) {
       console.error(error.response);
       throw error.response;

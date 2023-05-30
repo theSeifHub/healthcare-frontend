@@ -11,8 +11,6 @@ import {
   getReservedIncubators,
   getReservedICUBeds,
 } from "../axios/endpoints";
-import stores from '.';
-
 
 export default class DoctorServicesStore {
   upcomingSurgeries = [];

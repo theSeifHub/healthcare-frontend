@@ -7,8 +7,6 @@ import {
   getSpecialitiesList,
   getDrDataById,
 } from "../axios/endpoints";
-import stores from '.';
-
 
 export default class DoctorsStore {
   doctorsList = [];
@@ -29,14 +27,18 @@ export default class DoctorsStore {
     }
   }
 
+  setDoctorsList(list) {
+    this.doctorsList = list;
+  }
+
   async getDoctorsList(specialityId) {
     try {
       if (specialityId) {
         const { data } = await axiosInstance.get(filterDoctorsBySpeciality(specialityId));
-        this.doctorsList = data;
+        this.setDoctorsList(data);
       } else {
         const { data } = await axiosInstance.get(getDoctorsList);
-        this.doctorsList = data;
+        this.setDoctorsList(data);
       }
     } catch (error) {
       console.error(error.response);
@@ -44,10 +46,14 @@ export default class DoctorsStore {
     }
   }
 
+  setSpecialitiesList(list) {
+    this.specialitiesList = list;
+  }
+
   async getSpecialitiesList() {
     try {
       const { data: specsListRes } = await axiosInstance.get(getSpecialitiesList);
-      this.specialitiesList = specsListRes;
+      this.setSpecialitiesList(specsListRes);
     } catch (error) {
       console.error(error.response);
       throw error.response;
