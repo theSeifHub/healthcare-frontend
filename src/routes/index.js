@@ -1,6 +1,5 @@
 import {
   AboutUs,
-  Booking,
   Doctors,
   Home,
   SignIn,
@@ -18,6 +17,7 @@ import {
   CareRoomBooking,
   SurgeryBooking,
   DoctorProfile,
+  AppointmentBooking,
 } from '../screens';
 
 const appRoutes = [
@@ -83,7 +83,7 @@ const appRoutes = [
   },
   {
     path: '/booking',
-    element: <Booking />,
+    element: <AppointmentBooking />,
     exact: true,
   },
   {

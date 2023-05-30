@@ -4,6 +4,8 @@ import {
   showDoctorSchedule,
   getReservedDoctorSchedule,
   createDoctorSchedule,
+  getDrAvailableAppointments,
+  createNewAppointment,
 } from "../axios/endpoints";
 import stores from '.';
 
@@ -63,6 +65,26 @@ export default class ScheduleStore {
       });
 
       this.setReservedAppointments(appRes)
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
+
+  async getAvailableAppointmentsByDrId(id) {
+    try {
+      const { data: drScheduleRes } = await axiosInstance.get(getDrAvailableAppointments(id));
+      return Promise.resolve(drScheduleRes);
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
+
+  async reserveAppointment(appId) {
+    try {
+      const { data: appRes } = await axiosInstance.put(createNewAppointment(appId));
+      return Promise.resolve(appRes);
     } catch (error) {
       console.error(error.response);
       throw error.response;

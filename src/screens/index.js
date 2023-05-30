@@ -5,7 +5,7 @@ import PatientSignUp from './PatientSignUp';
 import Home from './Home';
 import AboutUs from './AboutUs';
 import Doctors from './Doctors';
-import Booking from './Booking';
+import AppointmentBooking from './AppointmentBooking';
 import DoctorServicesLanding from './DoctorServicesLanding';
 import PatientServicesLanding from './PatientServicesLanding';
 import ContactUs from './ContactUs';
@@ -26,7 +26,7 @@ export {
   Home,
   AboutUs,
   Doctors,
-  Booking,
+  AppointmentBooking,
   DoctorServicesLanding,
   DoctorServices,
   PatientServicesLanding,

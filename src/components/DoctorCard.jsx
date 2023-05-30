@@ -47,10 +47,7 @@ const DoctorCard = ({ doctorData, speciality, canBook }) => {
 				<Button
 					variant="contained"
 					size="large"
-					onClick={() => {
-						console.log("will book");
-						navigate("/booking");
-					}}
+					onClick={() => navigate(`/booking?doctor=${doctorData.id}`)}
 					color="secondary"
 					style={{
 						width: spacing(15),

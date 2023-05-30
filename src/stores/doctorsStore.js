@@ -5,6 +5,7 @@ import {
   filterDoctorsBySpeciality,
   getDoctorsList,
   getSpecialitiesList,
+  getDrDataById,
 } from "../axios/endpoints";
 import stores from '.';
 
@@ -54,6 +55,16 @@ export default class DoctorsStore {
     try {
       const { data: specsListRes } = await axiosInstance.get(getSpecialitiesList);
       this.specialitiesList = specsListRes;
+    } catch (error) {
+      console.error(error.response);
+      throw error.response;
+    }
+  }
+
+  async getDoctorDataById(id) {
+    try {
+      const { data: drDataRes } = await axiosInstance.get(getDrDataById(id));
+      return Promise.resolve(drDataRes);
     } catch (error) {
       console.error(error.response);
       throw error.response;

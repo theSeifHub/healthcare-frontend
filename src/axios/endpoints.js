@@ -8,6 +8,7 @@ export const createDoctor = "/doctor/create/";
 export const getDoctorsList = "/doctor/index/";
 export const filterDoctorsBySpeciality = (specialityId) => `/doctor/index/?speciality=${specialityId}`;
 export const getSpecialitiesList = "/doctor/list/";
+export const getDrDataById = (id) => `/doctor/show/${id}/`;
 
 // doctor services
 export const createBloodBankService = "/bloodbank/create/";
@@ -31,3 +32,5 @@ export const getPatientServicesList = "/service/index/";
 export const showDoctorSchedule = (id) => `/schedule/show/${id}/`;
 export const getReservedDoctorSchedule = "/schedule/list_reserved/";
 export const createDoctorSchedule = "/schedule/create/";
+export const getDrAvailableAppointments = (id) => `/schedule/list_available/${id}/`;
+export const createNewAppointment = (id) => `/schedule/reserve/${id}/`;
