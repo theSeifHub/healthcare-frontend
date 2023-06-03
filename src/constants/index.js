@@ -73,23 +73,23 @@ export const specialitiesPreview = [
 
 export const doctorsPreview = [
   {
-    first_name: "Marwan",
-    last_name: "Mohamed",
-    association_number: "12345",
-    speciality: 'Ophthalmologist',
+    first_name: "Mahmoud",
+    last_name: "Esmat",
+    association_number: "254213697",
+    speciality: 'Dentistry',
 
   },
   {
-    first_name: "Nourhan",
-    last_name: "Mohamed",
-    association_number: "12345",
-    speciality: 'General Practitioner',
+    first_name: "Amany",
+    last_name: "El-Sherif",
+    association_number: "145896231",
+    speciality: 'Pediatrics',
   },
   {
-    first_name: "Alaa",
-    last_name: "Mahmoud",
-    association_number: "12345",
-    speciality: 'Obstetrician and Gynecologist',
+    first_name: "Essam Eldin",
+    last_name: "Mohamed",
+    association_number: "7852146953",
+    speciality: 'Dermatology',
   },
 ];
 

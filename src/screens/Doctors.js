@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useSearchParams } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 import theme from "../theme";
 import DoctorCard from "../components/DoctorCard";
 import stores from "../stores";
@@ -20,15 +21,17 @@ const Doctors = () => {
     Promise.all([
       stores.doctorsStore.getDoctorsList(clinicId),
       stores.doctorsStore.getSpecialitiesList(),
-    ]).then(res => setLoadingData(false));
+    ]).finally(() => setLoadingData(false));
   }, [clinicId]);
 
   if (loadingData) {
     return <Spinner size="large" />
   }
 
+  const { doctorsList, specialitiesList } = stores.doctorsStore;
+
   const findSpec = (drSpecialityId) => {
-    const speciality = stores.doctorsStore.specialitiesList.find(
+    const speciality = specialitiesList.find(
       (sp) => sp.id === drSpecialityId
     );
     return speciality;
@@ -43,13 +46,25 @@ const Doctors = () => {
       flexWrap: "wrap",
       gap: spacing(3),
     }}>
-      {stores.doctorsStore.doctorsList.map((dr) =>
+      {doctorsList.length > 0 ? doctorsList.map((dr) =>
         <DoctorCard
           key={dr.id}
           doctorData={dr}
           speciality={findSpec(dr.speciality)}
           canBook
         />
+      ) : (
+        <Box style={{
+          width: spacing(50),
+          marginTop: spacing(2),
+          padding: spacing(2),
+          border: "gray solid 1px",
+          borderRadius: spacing(1),
+        }}>
+          <Typography variant="h5" textAlign="center">
+            No Doctors Found!
+          </Typography>
+        </Box>
       )}
     </main>
   );

@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import {
   Paper,
@@ -6,9 +7,11 @@ import {
 } from "@mui/material";
 import theme from "../theme";
 import stores from "../stores";
-import { observer } from "mobx-react-lite";
+import Spinner from "../components/Spinner";
 
 const Clinics = () => {
+  const [loadingData, setLoadingData] = useState(true);
+
   const {
     spacing,
     palette: {
@@ -17,9 +20,14 @@ const Clinics = () => {
   } = theme;
 
   useEffect(() => {
-    stores.doctorsStore.getSpecialitiesList();
+    stores.doctorsStore
+      .getSpecialitiesList()
+      .finally(() => setLoadingData(false));
   }, []);
 
+  if (loadingData) {
+    return <Spinner size="large" />
+  }
   return (
     <main style={{
       padding: spacing(4),
