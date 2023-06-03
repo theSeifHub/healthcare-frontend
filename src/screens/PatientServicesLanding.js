@@ -52,7 +52,7 @@ const PatientServicesLanding = () => {
             }}>
               <img
                 alt='nurse with syringe'
-                src={require('../assets/img/services-injection.png')}
+                src={require('../assets/img/patient-services/services-injection.png')}
                 width={spacing(12)} height={spacing(13)}
               />
             </div>
@@ -101,7 +101,7 @@ const PatientServicesLanding = () => {
             }}>
               <img
                 alt='hospital building'
-                src={require('../assets/img/services-hospital.png')}
+                src={require('../assets/img/patient-services/services-hospital.png')}
                 width={spacing(12)} height={spacing(13)}
               />
             </div>
@@ -143,7 +143,7 @@ const PatientServicesLanding = () => {
           }}>
             <img
               alt='patient receiving suspended solution'
-              src={require('../assets/img/services-solution.png')}
+              src={require('../assets/img/patient-services/services-solution.png')}
               width={spacing(18)} height={spacing(18)}
             />
             <Typography
@@ -191,7 +191,7 @@ const PatientServicesLanding = () => {
             }}>
               <img
                 alt='wound bandage'
-                src={require('../assets/img/services-bandage.png')}
+                src={require('../assets/img/patient-services/services-bandage.png')}
                 width={spacing(14)} height={spacing(14)}
               />
             </div>

@@ -22,7 +22,7 @@ const Home = () => {
         <div>
           <img
             alt='hero: doctor amusing child in their office'
-            src={require('../assets/img/hero.png')}
+            src={require('../assets/img/home/hero.png')}
             width={spacing(70)} height={spacing(55)}
           />
         </div>
@@ -84,7 +84,7 @@ const Home = () => {
               padding: `${spacing(5)} ${spacing(2)}`,
             }}>
               <img
-                src={require(`../assets/img/${item.img}`)}
+                src={require(`../assets/img/home/${item.img}`)}
                 alt={item.alt}
                 width={spacing(36)}
                 height={spacing(40)}
@@ -120,7 +120,7 @@ const Home = () => {
                 }}>
                   <img
                     alt={spec.alt}
-                    src={require(`../assets/img/${spec.img}`)}
+                    src={require(`../assets/img/home/${spec.img}`)}
                     width={spacing(18)}
                     height={spacing(18)}
                   />

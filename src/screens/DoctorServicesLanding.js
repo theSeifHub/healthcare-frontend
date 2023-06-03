@@ -42,7 +42,7 @@ const DoctorServicesLanding = () => {
       <div style={{ margin: spacing(8) }}>
         <img
           alt='doctor and care giver with patient'
-          src={require('../assets/img/doctors-in-lab.png')}
+          src={require('../assets/img/doctor-services/landing-lab-doctors.png')}
           width={spacing(60)}
           height={spacing(60)}
         />

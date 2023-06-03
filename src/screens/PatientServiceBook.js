@@ -153,7 +153,7 @@ const PatientServiceBook = () => {
         }}>
           <img
             alt={serviceData.title}
-            src={require(`../assets/img/${serviceData.image}`)}
+            src={require(`../assets/img/patient-services/${serviceData.image}`)}
             width={spacing(32)}
             height={spacing(32)}
           />
