@@ -2,8 +2,7 @@ import axios from 'axios';
 import stores from '../stores';
 
 // const baseURL = 'http://localhost:8000';
-const baseURL = 'https://appointment-system-api.onrender.com';
-
+const baseURL = process.env.REACT_APP_BASE_URL;
 
 const axiosInstance = () => {
   const instance = axios.create({
