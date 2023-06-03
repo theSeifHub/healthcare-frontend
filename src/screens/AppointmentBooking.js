@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc';
 import {
   Paper,
   Button,
@@ -19,8 +20,13 @@ import theme from "../theme";
 import stores from "../stores";
 import Spinner from "../components/Spinner";
 
+dayjs.extend(utc);
+
 const renderAppointmentText = (startTime, endTime) => {
-  const text = `${dayjs(startTime).format("ddd DD/MM, h:mm a")} to ${dayjs(endTime).format("h:mm a")}`;
+  const startTimeDayjs = dayjs.utc(startTime);
+  const endTimeDayjs = dayjs.utc(endTime);
+
+  const text = `${startTimeDayjs.format("ddd DD/MM, h:mm a")} to ${endTimeDayjs.format("h:mm a")}`;
   return text;
 }
 
@@ -51,8 +57,9 @@ const AppointmentBooking = () => {
     ]).then(r => {
       setDoctorData(r[0]);
       setAvailableAppointments(r[1]);
-      setLoadingData(false);
-    });
+    }).finally(
+      () => setLoadingData(false)
+    );
   }, [doctorId]);
 
   if (loadingData || !doctorData) {
@@ -102,7 +109,7 @@ const AppointmentBooking = () => {
           width={spacing(28)}
           height={spacing(28)}
         />
-        <Typography variant="h5">
+        <Typography variant="h5" textAlign="center">
           Dr. {doctorData.first_name} {doctorData.last_name}
         </Typography>
         <Typography variant="h6">

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import LocalHospital from "@mui/icons-material/LocalHospital";
 import CreditCard from "@mui/icons-material/CreditCard";
 import theme from "../theme";
+import stores from "../stores";
 
 const DoctorCard = ({ doctorData, speciality, canBook }) => {
 	const navigate = useNavigate();
@@ -43,7 +44,7 @@ const DoctorCard = ({ doctorData, speciality, canBook }) => {
 				<CreditCard />
 				<Typography style={{ marginLeft: spacing(2) }}>{doctorData.association_number}</Typography>
 			</div>
-			{canBook && (
+			{!!stores.authStore.user.patient && canBook && (
 				<Button
 					variant="contained"
 					size="large"

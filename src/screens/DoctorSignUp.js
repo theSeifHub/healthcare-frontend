@@ -104,7 +104,8 @@ const DoctorSignUp = () => {
         };
 
         await stores.doctorsStore.createNewDoctor(doctorData);
-        navigate("/");
+        stores.authStore.logout();
+        navigate("/sign-in");
       } catch (err) {
         setSignUpError(`${err.status}: ${err.data[Object.keys(err.data)[0]]}`);
       } finally {
