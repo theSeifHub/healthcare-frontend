@@ -100,6 +100,7 @@ const CreateScheduleForm = () => {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <FormControl style={{ width: "45%" }}>
           <TimePicker
+            value={startTime}
             label="Start Time"
             onChange={(newValue) => setStartTime(dayjs(newValue).format("hh:mm a"))}
             renderInput={params => (
@@ -117,6 +118,7 @@ const CreateScheduleForm = () => {
 
         <FormControl style={{ width: "45%" }}>
           <TimePicker
+            value={endTime}
             label="End Time"
             onChange={(newValue) => setEndTime(dayjs(newValue).format("hh:mm a"))}
             renderInput={params => (

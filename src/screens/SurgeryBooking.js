@@ -251,7 +251,7 @@ const SurgeryBooking = () => {
                 gap: spacing(2),
               }}>
                 <FormLabel style={{ width: spacing(32) }}>
-                  Estimated time (in minutes):
+                  Estimated time (in hours):
                 </FormLabel>
                 <TextField
                   value={estimatedTime}
