@@ -8,7 +8,7 @@ import Spinner from "../../components/Spinner";
 import GenericTable from "../../components/GenericTable"
 import { weekDays } from "../../constants";
 import { getAgeFromBirthDate } from "../../utils/dateUtils";
-import { CreateScheduleForm } from "./CreateScheduleForm";
+import CreateScheduleForm from "./CreateScheduleForm";
 
 const createRowData = (
   id, patientName, patientPhone, patientAge, day, from, to,
@@ -19,9 +19,7 @@ const Schedule = () => {
 
   useEffect(() => {
     stores.scheduleStore
-      // .getDoctorSchedule(stores.authStore.user.doctor.id)
-      // TODO Update with actual dr ID
-      .getDoctorSchedule(1)
+      .getDoctorSchedule(stores.authStore.user.doctor.id)
       .finally(() => setLoadingData(false));
   }, []);
   if (loadingData) {

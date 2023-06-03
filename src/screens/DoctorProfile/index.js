@@ -61,9 +61,6 @@ const DoctorProfile = ({ goToTab }) => {
     sp => sp.id === user.doctor.speciality
   );
 
-  // const goldenStars = Math.ceil(Math.random() * 5);
-  // const darkStars = 5 - goldenStars;
-
   return (
     <main style={{ display: 'flex' }}>
       <Paper
@@ -83,7 +80,7 @@ const DoctorProfile = ({ goToTab }) => {
           width={spacing(28)}
           height={spacing(28)}
         />
-        <Typography variant="h5">
+        <Typography variant="h5" textAlign="center">
           Dr. {user.doctor.first_name} {user.doctor.last_name}
         </Typography>
         <Typography variant="h6">
@@ -123,7 +120,18 @@ const DoctorProfile = ({ goToTab }) => {
           })}
         </Tabs>
         <div style={{ padding: spacing(2), height: "95%", width: "95%" }}>
-          {renderCurrentTab(currentTab)}
+          {stores.authStore.user.doctor.status === "active"
+            ? renderCurrentTab(currentTab)
+            : (
+              <div style={{ textAlign: "center" }}>
+                <h3>
+                  Your profile is currently not activated.
+                </h3>
+                <p>
+                  Please ask Super Admin to update your status.
+                </p>
+              </div>
+            )}
         </div>
       </div>
     </main>

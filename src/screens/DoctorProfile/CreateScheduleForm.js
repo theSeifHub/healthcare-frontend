@@ -10,6 +10,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import { observer } from "mobx-react-lite";
 import theme from "../../theme";
 import stores from "../../stores";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +19,7 @@ import dayjs from 'dayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 
-export const CreateScheduleForm = () => {
+const CreateScheduleForm = () => {
   const { spacing } = theme;
   const navigate = useNavigate();
 
@@ -30,9 +31,9 @@ export const CreateScheduleForm = () => {
   const [endTimeError, setEndTimeError] = useState("");
 
   const [attemptingSubmit, setAttemptingSubmit] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const handleSubmit = async () => {
-    setAttemptingSubmit(true);
     setSelectedDaysError(selectedDays.length > 0 ? '' : 'Working days are required');
     setStartTimeError(startTime ? '' : 'Start time is required');
     setEndTimeError(endTime ? '' : 'End time is required');
@@ -40,19 +41,27 @@ export const CreateScheduleForm = () => {
     if (dayjs(startTime, "hh:mm a") > dayjs(endTime, "hh:mm a")) {
       setEndTimeError('End time cannot be before start time');
     } else if (selectedDays.length > 0 && startTime && endTime) {
+      setServerError("")
+      setAttemptingSubmit(true);
       const newSchedule = {
         days: selectedDays,
         start_time: dayjs(startTime, "hh:mm a").format("HH:mm"),
         end_time: dayjs(endTime, "hh:mm a").format("HH:mm"),
       };
 
-      const res = await stores.scheduleStore.createDoctorSchedule(newSchedule);
-
-      if (res) {
+      try {
+        await stores.scheduleStore.createDoctorSchedule(newSchedule);
         navigate(0);
+      } catch (error) {
+        if (error && error.data) {
+          setServerError(error.data.error)
+        } else {
+          setServerError("Unknown error occurred, try again later")
+        }
+      } finally {
+        setAttemptingSubmit(false);
       }
     }
-    setAttemptingSubmit(false);
   };
 
   return (
@@ -138,6 +147,10 @@ export const CreateScheduleForm = () => {
       >
         {attemptingSubmit ? "Creating ..." : "Create"}
       </Button>
+
+      {serverError && <Typography color="error" textAlign="center">{serverError}</Typography>}
     </Paper >
   )
 }
+
+export default observer(CreateScheduleForm);

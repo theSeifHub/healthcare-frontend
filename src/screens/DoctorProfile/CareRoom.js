@@ -10,7 +10,7 @@ import { getAgeFromBirthDate } from "../../utils/dateUtils";
 import { icuBeds } from "../../constants";
 
 const createRowData = (id, pName, pAge, start, estimated, bed) => ({
-  id, pName, pAge, start, end: estimated, bed
+  id, pName, pAge, start, estimated, bed
 });
 
 const CareRoom = () => {
@@ -37,7 +37,7 @@ const CareRoom = () => {
     { title: "Patient", id: "pName" },
     { title: "Age", id: "pAge" },
     { title: "Start Day", id: "start" },
-    { title: "Estimated Stay Days", id: "estimated" },
+    { title: "Estimated Time", id: "estimated" },
     { title: "Bed", id: "bed" },
   ];
 
@@ -45,14 +45,13 @@ const CareRoom = () => {
   const mapICUBeds = () => {
     const bedsList = [];
     reservedICUBeds.forEach(icuBed => {
-      // TODO update to correct response interface after fixed
-      const { id, patient, start_date, estimated, bed } = icuBed;
+      const { id, patient, start_time, estimated_time, bed } = icuBed;
       const patientName = `${patient.first_name} ${patient.last_name}`;
       const age = getAgeFromBirthDate(patient.date_of_birth);
-      const start = dayjs(start_date).format("dddd, MMM D, YYYY");
+      const start = dayjs(start_time).format("dddd, MMM D, YYYY");
 
       bedsList.push(createRowData(
-        id, patientName, age, start, estimated, icuBeds[bed]
+        id, patientName, age, start, estimated_time, icuBeds[bed]
       ));
     });
     return bedsList;
@@ -66,7 +65,7 @@ const CareRoom = () => {
       borderRadius: spacing(2),
     }}>
       <p>
-        <strong>Reserved ICU Beds: </strong>
+        <strong>Currently Occupied ICU Beds: </strong>
         {!reservedICUBeds.length > 0 && "None"}
       </p>
       {reservedICUBeds.length > 0 && (

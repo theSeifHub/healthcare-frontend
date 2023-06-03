@@ -9,8 +9,8 @@ import GenericTable from "../../components/GenericTable"
 import { getAgeFromBirthDate } from "../../utils/dateUtils";
 import { incubators } from "../../constants";
 
-const createRowData = (id, pName, pAge, start, end, incubator, guardian) => ({
-  id, pName, pAge, start, end, incubator, guardian
+const createRowData = (id, pName, pAge, start, incubator, guardian) => ({
+  id, pName, pAge, start, incubator, guardian
 });
 
 const Nursery = () => {
@@ -37,28 +37,21 @@ const Nursery = () => {
     { title: "Patient", id: "pName" },
     { title: "Age", id: "pAge" },
     { title: "Start Day", id: "start" },
-    { title: "End Day", id: "end" },
     { title: "Incubator", id: "incubator" },
     { title: "Guardian", id: "guardian" },
   ];
 
 
-  const mapIncubators = () => {
-    const incubatorsList = [];
-    reservedIncubators.forEach(inc => {
-      // TODO update to correct response interface after fixed
-      const { id, patient, start_date, end_date, incubator_id, guardian_name } = inc;
-      const patientName = `${patient.first_name} ${patient.last_name}`;
-      const age = getAgeFromBirthDate(patient.date_of_birth);
-      const start = dayjs(start_date).format("dddd, MMM D, YYYY");
-      const end = dayjs(end_date).format("dddd, MMM D, YYYY");
+  const incubatorsRows = reservedIncubators.map(inc => {
+    const { id, patient, start_date, incubator, gardian_name } = inc;
+    const patientName = `${patient.first_name} ${patient.last_name}`;
+    const age = getAgeFromBirthDate(patient.date_of_birth);
+    const start = dayjs(start_date).format("dddd, MMM D, YYYY");
 
-      incubatorsList.push(createRowData(
-        id, patientName, age, start, end, incubators[incubator_id], guardian_name
-      ));
-    });
-    return incubatorsList;
-  };
+    return createRowData(
+      id, patientName, age, start, incubators[incubator], gardian_name
+    );
+  });
 
   return (
     <Box style={{
@@ -68,11 +61,11 @@ const Nursery = () => {
       borderRadius: spacing(2),
     }}>
       <p>
-        <strong>Reserved Nurseries: </strong>
+        <strong>Currently Occupied Nurseries: </strong>
         {!reservedIncubators.length > 0 && "None"}
       </p>
       {reservedIncubators.length > 0 && (
-        <GenericTable headers={headers} rows={mapIncubators()} />
+        <GenericTable headers={headers} rows={incubatorsRows} />
       )}
     </Box>
   );

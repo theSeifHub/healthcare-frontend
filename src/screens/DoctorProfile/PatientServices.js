@@ -13,17 +13,17 @@ const createRowData = (service, pName, pAge, phone, time) => ({
 });
 
 const PatientServices = () => {
-  const [loadingScreen, setLoadingScreen] = useState(true);
+  const [loadingData, setLoadingData] = useState(true);
 
   const { spacing } = theme;
 
   useEffect(() => {
     stores.patientsStore
       .getPatientServicesList()
-      .finally(() => setLoadingScreen(false));
+      .finally(() => setLoadingData(false));
   }, []);
 
-  if (loadingScreen) {
+  if (loadingData) {
     return <Spinner size="large" />
   }
 

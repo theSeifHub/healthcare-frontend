@@ -22,9 +22,9 @@ const BloodBank = () => {
   const [loadingData, setLoadingData] = useState(true);
 
   const [bloodType, setBloodType] = useState("A+");
-  const [bagsDisplay, setBagsDisplay] = useState("");
 
-  const [maxBags, setMaxBags] = useState(0);
+  const [bagsInStock, setBagsInStock] = useState(0);
+  const [fetchingBags, setFetchingBags] = useState(false);
   const [requestedBags, setRequestedBags] = useState(0);
   const [requestedBagsError, setRequestedBagsError] = useState("");
 
@@ -32,16 +32,15 @@ const BloodBank = () => {
   const [successfulSubmission, setSuccessfulSubmission] = useState(false);
 
   useEffect(() => {
+    setFetchingBags(true);
     stores.doctorServicesStore
       .getBloodTypeAmount(bloodType)
-      .then(r => {
-        const amountMsg = r[bloodType];
-        setBagsDisplay(amountMsg);
-        // remove " bag(s)" from the string to extract the actual amount
-        const amount = Number(amountMsg.substring(0, amountMsg.length - 7));
-        setMaxBags(isNaN(amount) ? 0 : amount);
-      })
-      .finally(() => setLoadingData(false));
+      .then(res => setBagsInStock(res.amount_in_bags || 0))
+      .catch(err => console.error("Blood bank error", err))
+      .finally(() => {
+        setFetchingBags(false);
+        setLoadingData(false);
+      });
   }, [bloodType, successfulSubmission]);
 
   if (loadingData) {
@@ -49,28 +48,28 @@ const BloodBank = () => {
   }
 
   const handleRequest = async () => {
-    setAttemptingSubmit(true);
     if (requestedBags <= 0) {
       setRequestedBagsError('Number of bags is required');
-    } else if (maxBags && requestedBags > maxBags) {
-      setRequestedBagsError(`Maximum ${maxBags} bags`);
-    } else if (bloodType && maxBags && requestedBags > 0 && requestedBags <= maxBags) {
+    } else if (bagsInStock && requestedBags > bagsInStock) {
+      setRequestedBagsError(`Maximum ${bagsInStock} bags`);
+    } else if (bloodType && bagsInStock && requestedBags > 0 && requestedBags <= bagsInStock) {
+      setAttemptingSubmit(true);
       setRequestedBagsError('');
       const newBBRequest = {
         blood_type: bloodType,
         amount: requestedBags,
       };
-      const res = await stores.doctorServicesStore.createBloodBankBagRequest(newBBRequest);
 
-      if (res) {
+      try {
+        await stores.doctorServicesStore.createBloodBankBagRequest(newBBRequest);
         setSuccessfulSubmission(true);
-        setTimeout(
-          () => setSuccessfulSubmission(false),
-          2000,
-        )
+        setTimeout(() => setSuccessfulSubmission(false), 1000);
+      } catch (error) {
+        console.error("BloodBank error:", error);
+      } finally {
+        setAttemptingSubmit(false);
       }
     }
-    setAttemptingSubmit(false);
   };
 
   return (
@@ -111,9 +110,11 @@ const BloodBank = () => {
         </Select>
 
         <Typography
-          variant="h6"
+          fontWeight="700"
+          textAlign="center"
           style={{ width: spacing(15), height: spacing(4) }}
-        >{bagsDisplay}</Typography>
+          component="div"
+        >{fetchingBags ? <Spinner size="xsmall" /> : `${bagsInStock} bags`}</Typography>
       </FormControl>
 
       <Box style={{
@@ -141,13 +142,14 @@ const BloodBank = () => {
             type="number"
             value={requestedBags}
             onChange={(evt) => {
+              evt.preventDefault();
               if (evt.currentTarget.value >= 0) {
-                setRequestedBags(evt.currentTarget.value)
+                setRequestedBags(Number(evt.currentTarget.value))
               }
             }}
             variant="outlined"
             style={{ width: spacing(15) }}
-            disabled={maxBags === 0}
+            disabled={bagsInStock === 0}
             error={!!requestedBagsError}
           />
           {successfulSubmission ? (
@@ -166,7 +168,7 @@ const BloodBank = () => {
               color="success"
               size="large"
               onClick={handleRequest}
-              disabled={maxBags === 0 || attemptingSubmit}
+              disabled={bagsInStock === 0 || attemptingSubmit}
               style={{ width: spacing(16), borderRadius: spacing(1) }}
             >{attemptingSubmit ? "Sending ..." : "Request"}</Button>
           )}
