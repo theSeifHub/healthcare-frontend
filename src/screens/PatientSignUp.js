@@ -55,7 +55,6 @@ const PatientSignUp = () => {
   const [attemptingSignup, setAttemptingSignup] = useState(false);
 
   const handleRegister = async () => {
-    setAttemptingSignup(true);
     setFirstNameError(firstName ? '' : 'First name is required');
     setMiddleNameError(middleName ? '' : 'Middle name is required');
     setLastNameError(lastName ? '' : 'Last name is required');
@@ -77,6 +76,7 @@ const PatientSignUp = () => {
       && middleName
       && lastName
     ) {
+      setAttemptingSignup(true);
       try {
         const userData = {
           user_name: userName,
@@ -101,9 +101,10 @@ const PatientSignUp = () => {
         navigate("/");
       } catch (err) {
         setSignUpError(`${err.status}: ${err.data[Object.keys(err.data)[0]]}`);
+      } finally {
+        setAttemptingSignup(false);
       }
     }
-    setAttemptingSignup(false);
   };
 
   return (
@@ -269,13 +270,13 @@ const PatientSignUp = () => {
             onClick={handleRegister}
             endIcon={<SendIcon />}
             style={{
-              width: spacing(15),
+              width: spacing(25),
               background: background.default,
               marginLeft: "auto",
               marginTop: "auto",
             }}
             disabled={attemptingSignup}
-          >{attemptingSignup ? "Signing Up ..." : "Done"}</Button>
+          >{attemptingSignup ? "Registering ..." : "Register"}</Button>
         </FormControl>
 
       </Paper>

@@ -18,19 +18,24 @@ const SignIn = () => {
   const [attemptingLogin, setAttemptingLogin] = useState(false);
 
   const handleLogin = async () => {
-    setAttemptingLogin(true);
     setEmailError(email ? '' : 'Email is required');
     setPasswordError(password ? '' : 'Password is required');
     if (email && password) {
-      setLoginError('');
       try {
+        setAttemptingLogin(true);
+        setLoginError('');
         await stores.authStore.login(email, password);
         navigate('/');
       } catch (err) {
-        setLoginError(`${err.status}: ${err.data.detail}`);
+        if (err) {
+          setLoginError(`${err.status}: ${err.data.detail}`);
+        } else {
+          setLoginError("Unknown error occurred, try again later");
+        }
+      } finally {
+        setAttemptingLogin(false);
       }
     }
-    setAttemptingLogin(false);
   };
 
   return (
