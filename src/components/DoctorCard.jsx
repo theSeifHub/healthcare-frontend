@@ -44,7 +44,7 @@ const DoctorCard = ({ doctorData, speciality, canBook }) => {
 				<CreditCard />
 				<Typography style={{ marginLeft: spacing(2) }}>{doctorData.association_number}</Typography>
 			</div>
-			{!!stores.authStore.user.patient && canBook && (
+			{!!stores.authStore.user && !!stores.authStore.user.patient && canBook && (
 				<Button
 					variant="contained"
 					size="large"
