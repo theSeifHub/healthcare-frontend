@@ -49,9 +49,10 @@ const CareRoom = () => {
       const patientName = `${patient.first_name} ${patient.last_name}`;
       const age = getAgeFromBirthDate(patient.date_of_birth);
       const start = dayjs(start_time).format("dddd, MMM D, YYYY");
+      const estimate = estimated_time.slice(-2) + " days"
 
       bedsList.push(createRowData(
-        id, patientName, age, start, estimated_time, icuBeds[bed]
+        id, patientName, age, start, estimate, icuBeds[bed]
       ));
     });
     return bedsList;
