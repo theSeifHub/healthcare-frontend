@@ -36,7 +36,7 @@ const NavBar = () => {
 		<AppBar
 			style={{
 				background: background.default,
-				position: "static",
+				position: "fixed",
 				display: "flex",
 				flexDirection: "row",
 				justifyContent: "space-between"
@@ -66,9 +66,11 @@ const NavBar = () => {
 					)}
 				</ul>
 			</nav>
-			<div style={{ width: spacing(30), display: "flex", alignItems: "center", gap: spacing(2) }}>
+			<div style={{ width: spacing(45), display: "flex", alignItems: "center", gap: spacing(2) }}>
 				{authStore.user ? (
 					<>
+						<p style={{ fontWeight: "bold" }}>{authStore.user.email}</p>
+
 						{authStore.user.doctor && (
 							<RouterLink to={"/me"} style={{ textDecoration: "none", color: "black" }}>
 								<AccountCircleIcon fontSize="large" />
