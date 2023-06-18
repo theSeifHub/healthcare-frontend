@@ -48,7 +48,6 @@ export default class ScheduleStore {
         this.setCurrentDrSchedule(null);
       }
       console.error(error.response);
-      throw error.response;
     }
   }
 
